@@ -24,8 +24,7 @@ SetupOCXFile=
 
 [Script]
 /*
-	待完成： 
-			2、添加倒计时提示窗口
+	梦幻西游手游自动抢购系统，最多可输入商城珍品公示期倒计时，自动算出抢购时间并抢购，可抢购完后选择自动关机。
 */
 //*********************************   源代码   *****************************************
 Dim Obj, UserName, NowTime, LenS, Num
@@ -74,7 +73,7 @@ Sub 开始
     //调用“Wscript.Shell”
     UserName=Obj.RegRead("HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\RegisteredOwner")
     // RegRead -- 读取注册表
-    YN=Obj.Popup(UserName&" 你好，请确保安全锁已打开否则导致抢购失败!"&chr (13) &"是否输入目标物品公示期时间进行定时抢购？"&chr (13) &" [是]   ：输入公示期结束时间"&chr (13) &" [否]   ：直接运行抢购程序"&chr (13) &" [取消]：退出程序",0,"白玉京",3)
+    YN=Obj.Popup(UserName&" 你好，是否输入目标物品公示期时间进行定时抢购？"&chr (13) &" [是]   ：输入公示期结束时间"&chr (13) &" [否]   ：直接运行抢购程序"&chr (13) &" [取消]：退出程序",0,"白玉京",3)
     //Popup--弹出对话框
     If YN = 6 Then //如果【是】按钮被单击
         获取时间 
@@ -275,62 +274,62 @@ Sub 转到商城关注
     FindColor 37,138,52,161,"8CD7FF",intX,intY
     If intX > 0 And intY > 0 Then //如果在战斗中
         MoveTo intX, intY //选中物品
-        Delay 100
-        LeftClick 1//点击选中 
         Delay 300
+        LeftClick 1//点击选中 
+        Delay 500
         Randomize //初始化随机数生成器。
         x = Int(((63-35)* Rnd) + 35) 
         y = Int(((322-283) * Rnd) + 283)
         MoveTo x, y//移动至商城按钮  
-        Delay 100
+        Delay 500
         LeftClick 1//点击进入
         Randomize //初始化随机数生成器。
         x = Int(((959-925)* Rnd) + 925) 
         y = Int(((455-393) * Rnd) + 393)
         MoveTo x, y//移动至摆摊
-        Delay 100
+        Delay 300
         LeftClick 1//点击选中
         Delay 300
         Randomize //初始化随机数生成器。
         x = Int(((88-54)* Rnd) + 54) 
         y = Int(((524-445) * Rnd) + 445)
         MoveTo x, y//跨服
-        Delay 100
+        Delay 300
         LeftClick 1//点击选中
         Delay 300
         Randomize //初始化随机数生成器。
         x = Int(((85-53)* Rnd) + 53) 
         y = Int(((419-340) * Rnd) + 340)
         MoveTo x, y//本服
-        Delay 100
+        Delay 300
         LeftClick 1//点击选中
     Else //如果不是在战斗中
         Randomize //初始化随机数生成器。
         x = Int(((65-24)* Rnd) + 24) 
         y = Int(((314-269) * Rnd) + 269)
         MoveTo x, y//移动至商城按钮  
-        Delay 100
+        Delay 300
         LeftClick 1	//点击进入
         Delay 500
         Randomize //初始化随机数生成器。
         x = Int(((959-925)* Rnd) + 925) 
         y = Int(((455-393) * Rnd) + 393)
         MoveTo x, y//移动至摆摊
-        Delay 100
+        Delay 300
         LeftClick 1//点击选中
         Delay 300
         Randomize //初始化随机数生成器。
         x = Int(((88-54)* Rnd) + 54) 
         y = Int(((524-445) * Rnd) + 445)
         MoveTo x, y//跨服
-        Delay 100
+        Delay 300
         LeftClick 1//点击选中
         Delay 300
         Randomize //初始化随机数生成器。
         x = Int(((85-53)* Rnd) + 53) 
         y = Int(((419-340) * Rnd) + 340)
         MoveTo x, y//本服
-        Delay 100
+        Delay 300
         LeftClick 1//点击选中
     End If
 End Sub
@@ -339,7 +338,7 @@ Sub 刷新判断
     x = Int(((259-109)* Rnd) + 109) 
     y = Int(((402-354) * Rnd) + 354)
     MoveTo x, y//移动至关注菜单
-    Delay 100
+    Delay 300
     Rem 疯狂刷新
     LeftClick 1//点击
     NowTime = Time//获取第一次刷新的当下时间
@@ -369,7 +368,6 @@ Sub 刷新判断
             Goto 结束刷新
         End If
         Goto 重复购买//如果没有刷出物品则跳到刷新关注
-        Delay 2000
     End If
     Goto 疯狂刷新
     Rem 结束刷新
