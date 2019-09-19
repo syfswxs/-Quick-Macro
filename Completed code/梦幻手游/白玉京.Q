@@ -377,14 +377,14 @@ Sub 购买
     MoveTo x, y//移动到购买
     LeftClick 1//点击购买
     Delay 500
-    //MoveTo 481, 339//移动到关闭
+    //MoveTo 488, 287//移动到关闭
     Randomize //初始化随机数生成器。
     x = Int(((403-246)* Rnd) + 246) 
     y = Int(((547-498) * Rnd) + 498)
-    MoveTo x, y//移动到确认*/
+    MoveTo x, y//移动到确认
     LeftClick 1//点击确定
     Delay 300
-    FindColor 691,287,727,324,"0013C0",intX,intY//如果出现钱不够情况
+    FindColor 318,234,362,248,"0013C0",intX,intY//如果出现钱不够情况
     If intX > 0 And intY > 0 Then 
         MoveTo intX, intY
         LeftClick 1
@@ -396,39 +396,40 @@ Sub 截图
     If Xj = true Then 
         Goto 结束截图
     End If
-    FindColor 454,313,548,348,"A0C3DF",intX,intY
-    If intX > 0 And intY > 0 Then //如果物品消失
+    FindColor 321,234,342,248,"9DC1DF",intX,intY
+    If intX> 0 And intY> 0 Then//如果物品消失
         Randomize //初始化随机数生成器。
-        x = Int(((402-281)* Rnd) + 281) 
-        y = Int(((270-239) * Rnd) + 239)
+        x = Int(((408-285)* Rnd) + 285) 
+        y = Int(((202-172) * Rnd) + 172)
         MoveTo x, y//移动到我要出售
         LeftClick 1//点击
         Delay 200
         Randomize //初始化随机数生成器。
-        x = Int(((851-736)* Rnd) + 736) 
-        y = Int(((265-239) * Rnd) + 239)
+        x = Int(((875-754)* Rnd) + 754) 
+        y = Int(((201-169) * Rnd) + 169)
         MoveTo x, y//移动到交易记录
         LeftClick 1//点击
         Delay 500
         MoveTo 1468, 918//点击截图按钮
         LeftClick 1
         Delay 1000
-        MoveTo 59, 188//找到截图区域
+        MoveTo 502, 155//找到截图区域
         LeftDown 1
         Delay 500
-        MoveTo 923, 735
+        MoveTo 966, 705
         LeftUp 1
         Delay 500
-        MoveTo 887, 760
+        MoveTo 932, 727
         LeftClick 1
         Delay 1000
         MoveTo 1840, 1018//点击发送
         LeftClick 1
         Delay 1000
-        MoveTo 504, 306//关闭交易记录
-        RightClick 1
+        MoveTo 949, 138//关闭交易记录
+        LeftClick 1 
         Delay 300
-        RightClick 1
+        MoveTo 925, 135//关闭交易记录
+        LeftClick 1 
         Delay 300
     End If
     Rem 结束截图
@@ -520,11 +521,11 @@ Sub 查看安全锁
             Delay 300
         End If
     Else //如果没在战斗中
-        FindColor 556,739,578,763,"AC7D87",intX,intY
-        If intX > 0 And intY > 0 Then //如果下方系统栏展开
+        FindColor 898,743,916,761,"2022FB",intX,intY
+        If intX> 0 And intY> 0 Then//如果下方系统栏展开
             Randomize //初始化随机数生成器。
-            x = Int(((588-548)* Rnd) + 548) 
-            y = Int(((772-731) * Rnd) + 731)
+            x = Int(((655-618)* Rnd) + 618) 
+            y = Int(((765-731) * Rnd) + 731)
             MoveTo x, y//移动至下方系统栏按钮  
             Delay 100
             LeftClick 1//点击进入
@@ -532,15 +533,15 @@ Sub 查看安全锁
             安全锁
         Else //如果没有展开
             Randomize //初始化随机数生成器。
-            x = Int(((1014-967)* Rnd) + 967) 
-            y = Int(((775-735) * Rnd) + 735)
+            x = Int(((1007-977)* Rnd) + 977) 
+            y = Int(((765-734) * Rnd) + 734)
             MoveTo x, y//移动至下方加号展开按钮  
             Delay 100
             LeftClick 1//点击进入
             Delay 1000
             Randomize //初始化随机数生成器。
-            x = Int(((588-548)* Rnd) + 548) 
-            y = Int(((772-731) * Rnd) + 731)
+            x = Int(((655-618)* Rnd) + 618) 
+            y = Int(((765-731) * Rnd) + 731)
             MoveTo x, y//移动至下方系统栏按钮  
             Delay 100
             LeftClick 1//点击进入
