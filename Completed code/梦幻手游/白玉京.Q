@@ -506,8 +506,8 @@ Sub 查看安全锁
         LeftClick 1//点击选中 
         Delay 300
         Randomize //初始化随机数生成器。
-        x = Int(((591-545)* Rnd) + 545) 
-        y = Int(((771-732) * Rnd) + 732)
+        x = Int(((205-166)* Rnd) + 166) 
+        y = Int(((257-207) * Rnd) + 207)
         MoveTo x, y//移动至设置按钮  
         Delay 100
         LeftClick 1//点击进入
@@ -524,8 +524,8 @@ Sub 查看安全锁
         FindColor 898,743,916,761,"2022FB",intX,intY
         If intX> 0 And intY> 0 Then//如果下方系统栏展开
             Randomize //初始化随机数生成器。
-            x = Int(((591-545)* Rnd) + 545) 
-            y = Int(((771-732) * Rnd) + 732)
+            x = Int(((587-542)* Rnd) + 542) 
+            y = Int(((770-729) * Rnd) + 729)
             MoveTo x, y//移动至下方系统栏按钮  
             Delay 100
             LeftClick 1//点击进入
@@ -540,8 +540,8 @@ Sub 查看安全锁
             LeftClick 1//点击进入
             Delay 1000
             Randomize //初始化随机数生成器。
-            x = Int(((655-618)* Rnd) + 618) 
-            y = Int(((765-731) * Rnd) + 731)
+            x = Int(((587-542)* Rnd) + 542) 
+            y = Int(((770-729) * Rnd) + 729)
             MoveTo x, y//移动至下方系统栏按钮  
             Delay 100
             LeftClick 1//点击进入
