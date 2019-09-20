@@ -263,32 +263,33 @@ Sub 转到商城关注
         LeftClick 1//点击选中 
         Delay 500
         Randomize //初始化随机数生成器。
-        x = Int(((66-23)* Rnd) + 23) 
-        y = Int(((258-212) * Rnd) + 212)
+        x = Int(((63-27)* Rnd) + 27) 
+        y = Int(((258-215) * Rnd) + 215)
         MoveTo x, y//移动至商城按钮  
         Delay 500
         LeftClick 1//点击进入
+        Delay 800
     Else //如果不是在战斗中
         Randomize //初始化随机数生成器。
-        x = Int(((63-9)* Rnd) + 9) 
-        y = Int(((253-194) * Rnd) + 194)
+        x = Int(((56-15)* Rnd) + 15) 
+        y = Int(((241-204) * Rnd) + 204)
         MoveTo x, y//移动至商城按钮  
         Delay 300
         LeftClick 1	//点击进入
-        Delay 500
+        Delay 800
     End If
     Randomize //初始化随机数生成器。
-    x = Int(((991-946)* Rnd) + 946) 
-    y = Int(((402-326) * Rnd) + 326)
+    x = Int(((986-954)* Rnd) + 954) 
+    y = Int(((391-335) * Rnd) + 335)
     MoveTo x, y//移动至摆摊
     Delay 300
     LeftClick 1//点击选中
     Delay 300
     Randomize //初始化随机数生成器。
-    x = Int(((81-47)* Rnd) + 47) 
-    y = Int(((348-285) * Rnd) + 285)
+    x = Int(((79-49)* Rnd) + 49) 
+    y = Int(((344-292) * Rnd) + 292)
     MoveTo x, y//本服
-    Delay 300
+    Delay 500
     LeftClick 1//点击选中
 End Sub
 Sub 刷新判断
@@ -325,7 +326,7 @@ Sub 刷新判断
         Goto 关注
     End If
     FindColor 131,320,142,329,"CFE0ED",intX,intY
-    If intX > 0 And intY > 0 Then 
+    If intX > 0 And intY > 0 Then //判断上面几个点是否把菜单栏拉到最上面
     Else 
         LeftUp 1
         Delay 500
@@ -334,8 +335,8 @@ Sub 刷新判断
     LeftUp 1
     Delay 500
     Randomize //初始化随机数生成器。
-    x = Int(((231-113)* Rnd) + 113) 
-    y = Int(((338-291) * Rnd) + 291)
+    x = Int(((214-135)* Rnd) + 135) 
+    y = Int(((341-298) * Rnd) + 298)
     MoveTo x, y//移动到关注按钮
     Rem 疯狂刷新
     LeftClick 1//点击
@@ -372,15 +373,15 @@ Sub 刷新判断
 End Sub
 Sub 购买
     Randomize //初始化随机数生成器。
-    x = Int(((900-783)* Rnd) + 783) 
-    y = Int(((699-652) * Rnd) + 652)
+    x = Int(((887-796)* Rnd) + 796) 
+    y = Int(((696-660) * Rnd) + 660)
     MoveTo x, y//移动到购买
     LeftClick 1//点击购买
     Delay 500
     //MoveTo 488, 287//移动到关闭
     Randomize //初始化随机数生成器。
-    x = Int(((403-246)* Rnd) + 246) 
-    y = Int(((547-498) * Rnd) + 498)
+    x = Int(((357-285)* Rnd) + 285) 
+    y = Int(((541-506) * Rnd) + 506)
     MoveTo x, y//移动到确认
     LeftClick 1//点击确定
     Delay 300
@@ -399,14 +400,14 @@ Sub 截图
     FindColor 321,234,342,248,"9DC1DF",intX,intY
     If intX> 0 And intY> 0 Then//如果物品消失
         Randomize //初始化随机数生成器。
-        x = Int(((408-285)* Rnd) + 285) 
-        y = Int(((202-172) * Rnd) + 172)
+        x = Int(((393-299)* Rnd) + 299) 
+        y = Int(((201-172) * Rnd) + 172)
         MoveTo x, y//移动到我要出售
         LeftClick 1//点击
         Delay 200
         Randomize //初始化随机数生成器。
-        x = Int(((875-754)* Rnd) + 754) 
-        y = Int(((201-169) * Rnd) + 169)
+        x = Int(((856-770)* Rnd) + 770) 
+        y = Int(((199-170) * Rnd) + 170)
         MoveTo x, y//移动到交易记录
         LeftClick 1//点击
         Delay 500
@@ -506,8 +507,8 @@ Sub 查看安全锁
         LeftClick 1//点击选中 
         Delay 300
         Randomize //初始化随机数生成器。
-        x = Int(((205-166)* Rnd) + 166) 
-        y = Int(((257-207) * Rnd) + 207)
+        x = Int(((205-169)* Rnd) + 169) 
+        y = Int(((250-212) * Rnd) + 212)
         MoveTo x, y//移动至设置按钮  
         Delay 100
         LeftClick 1//点击进入
@@ -574,4 +575,4 @@ Sub 主程序
     查看安全锁 
     开始
 End Sub
-Call 主程序
+Call 抢购
