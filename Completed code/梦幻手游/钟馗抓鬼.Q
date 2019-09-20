@@ -1,7 +1,17 @@
 /*
-	已写好判断队伍人数是否够4人，其他功能待完善
+	未完成：
+	在队伍人数判断中如果4号位暂离会影响判断，待解决
 */
+Dim Obj, Shuang, zdgj
+zdgj = false//自动关机默认为false
+set Obj = createobject("WScript.Shell")
 Shuang = false//双默认为不存在
+Sub 自动关机
+    YN = Obj.Popup("双用完后是否自动关机？", 0, "自动抓鬼", 4)
+    If YN = 6 Then //如果点击是
+        zdgj = true
+    End If 		
+End Sub
 Sub 队伍人数
     Randomize //初始化随机数生成器。
     x = Int(((1013-974)* Rnd) + 974) 
@@ -68,6 +78,18 @@ Sub 双
     LeftClick 1//点击关闭界面
     Delay 500
 End Sub//给出Shuang的值 true为双倍经验还在，false为已经用完
+Sub 站着不动且没任务
+    双 //检测是否用完双
+    队伍人数 //检测队伍人数
+    If Shuang = true and PNumber = true Then 
+        接任务
+    End If
+    If Shuang = false and zdgj = true Then 
+        Call Obj.Popup("5秒后自动关机",5,"自动抓鬼",48)
+        Obj.Run "shutdown /f /s /t 0"
+        //调用shutdown命令。 /f--强行关闭应用程序而不提醒， /s--关闭计算机（要重启的话，请把这改成/r[重启计算机]），/t time--在time秒后前闭计算机。
+    End If
+End Sub
 Sub 一轮
     FindColor 546,442,668,490,"62C1EE",intX,intY
     If intX > 0 And intY > 0 Then //如果出现抓完提示
@@ -76,12 +98,8 @@ Sub 一轮
         Delay 1000
         MoveTo 571, 250
         LeftClick 1
-        Delay 1000
-        双 //检测是否用完双
-        队伍人数 //检测队伍人数
-        If Shuang = true and PNumber = true Then 
-            接任务
-        End If
+        Delay 3000
+        站着不动且没任务 
     End If 
 End Sub//如果出现提示则自动点击传送至钟馗处
 Sub 监测是否正常
@@ -90,7 +108,7 @@ Sub 监测是否正常
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
     Else //不在战斗中
-        Delay 3000
+        Delay 10000
         一轮 //第一步监控是否出现弹窗提醒抓完鬼
         FindColor 977,187,1021,238,"3DFBFF",intX,intY
         If intX > 0 And intY > 0 Then //如果不在战斗中但右边有抓鬼任务
@@ -102,11 +120,7 @@ Sub 监测是否正常
             LeftClick 1//点击任务栏自动抓鬼
             Delay 20000//等20秒
         Else 
-            双 //检测是否用完双
-            队伍人数 //检测队伍人数
-            If Shuang = true and PNumber = true Then 
-                接任务
-            End If
+            站着不动且没任务 
         End If
     End If
 End Sub
