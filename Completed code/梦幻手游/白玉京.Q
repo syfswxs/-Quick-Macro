@@ -575,4 +575,4 @@ Sub 主程序
     查看安全锁 
     开始
 End Sub
-Call 抢购
+Call 主程序
