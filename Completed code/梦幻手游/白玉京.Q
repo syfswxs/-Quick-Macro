@@ -256,8 +256,8 @@ Sub 是否自动关机
     End If 		
 End Sub
 Sub 转到商城关注
-    FindColor 30,69,44,90,"8BD6FF",intX,intY
-    If intX> 0 And intY> 0 Then//如果在战斗中
+    FindColor 967,718,1007,755,"3866C0",intX,intY
+    if intX > 0 And intY Then //在战斗中
         MoveTo intX, intY //选中物品
         Delay 300
         LeftClick 1//点击选中 
@@ -500,8 +500,8 @@ Sub 抢购
     截图
 End Sub
 Sub 查看安全锁
-    FindColor 30,69,44,90,"8BD6FF",intX,intY
-    If intX > 0 And intY > 0 Then //如果在战斗中
+    FindColor 967,718,1007,755,"3866C0",intX,intY
+    if intX > 0 And intY Then //在战斗中
         MoveTo intX, intY //移动到左上方菜单
         Delay 100
         LeftClick 1//点击选中 
