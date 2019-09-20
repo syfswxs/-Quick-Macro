@@ -197,6 +197,7 @@ Sub 接任务
     Rem 结束接任务
 End Sub//自动接任务并开始抓鬼
 Sub 主程序
+	自动关机
     Rem 监测
     监测是否正常 
     If Shuang = false Then //如果双用完了
