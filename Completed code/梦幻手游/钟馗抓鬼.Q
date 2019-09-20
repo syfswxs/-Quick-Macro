@@ -108,7 +108,13 @@ Sub 监测是否正常
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
     Else //不在战斗中
-        Delay 10000
+        For 10//延迟10秒，在等待的过程中判断是否进入战斗
+            FindColor 967,718,1007,755,"3866C0",intX,intY
+            If intX > 0 And intY Then //如果进入了战斗
+                Goto 结束监测
+            End If
+            Delay 1000
+        Next
         一轮 //第一步监控是否出现弹窗提醒抓完鬼
         FindColor 977,187,1021,238,"3DFBFF",intX,intY
         If intX > 0 And intY > 0 Then //如果不在战斗中但右边有抓鬼任务
@@ -123,6 +129,7 @@ Sub 监测是否正常
             站着不动且没任务 
         End If
     End If
+    Rem 结束监测
 End Sub
 Sub 接任务
     Randomize //初始化随机数生成器。
@@ -197,7 +204,7 @@ Sub 接任务
     Rem 结束接任务
 End Sub//自动接任务并开始抓鬼
 Sub 主程序
-	自动关机
+    自动关机
     Rem 监测
     监测是否正常 
     If Shuang = false Then //如果双用完了
