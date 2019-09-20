@@ -258,10 +258,13 @@ End Sub
 Sub 转到商城关注
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
-        MoveTo intX, intY //选中物品
+        Randomize //初始化随机数生成器。
+        x = Int(((40-19)* Rnd) + 19) 
+        y = Int(((95-64) * Rnd) + 64)
+        MoveTo x, y//移动至展开菜单栏按钮  
+        Delay 100
+        LeftClick 1//点击进入
         Delay 300
-        LeftClick 1//点击选中 
-        Delay 500
         Randomize //初始化随机数生成器。
         x = Int(((63-27)* Rnd) + 27) 
         y = Int(((258-215) * Rnd) + 215)
@@ -400,36 +403,50 @@ Sub 截图
     FindColor 321,234,342,248,"9DC1DF",intX,intY
     If intX> 0 And intY> 0 Then//如果物品消失
         Randomize //初始化随机数生成器。
-        x = Int(((393-299)* Rnd) + 299) 
-        y = Int(((201-172) * Rnd) + 172)
-        MoveTo x, y//移动到我要出售
+        x = Int(((939-910)* Rnd) + 910) 
+        y = Int(((152-121) * Rnd) + 121)
+        MoveTo x, y//移动到关闭
         LeftClick 1//点击
-        Delay 200
-        Randomize //初始化随机数生成器。
-        x = Int(((856-770)* Rnd) + 770) 
-        y = Int(((199-170) * Rnd) + 170)
-        MoveTo x, y//移动到交易记录
-        LeftClick 1//点击
-        Delay 500
+        Delay 800
+        FindColor 967,718,1007,755,"3866C0",intX,intY
+        if intX > 0 And intY Then //在战斗中
+            Randomize //初始化随机数生成器。
+        x = Int(((40-19)* Rnd) + 19) 
+        y = Int(((95-64) * Rnd) + 64)
+        MoveTo x, y//移动至展开菜单栏按钮  
+        Delay 100
+        LeftClick 1//点击进入
+        Delay 800
+            Randomize //初始化随机数生成器。
+            x = Int(((64-26)* Rnd) + 26) 
+            y = Int(((101-55) * Rnd) + 55)
+            MoveTo x, y//移动到包裹
+            LeftClick 1//点击
+            Delay 500
+        Else //如果不在战斗中
+            Randomize //初始化随机数生成器。
+            x = Int(((1008 - 971) * Rnd) + 971)
+            y = Int(((699 - 660) * Rnd) + 660)
+            MoveTo x, y//移动到包裹
+            LeftClick 1//点击
+            Delay 500
+        End If
         MoveTo 1468, 918//点击截图按钮
         LeftClick 1
         Delay 1000
-        MoveTo 502, 155//找到截图区域
+        MoveTo 492, 160//找到截图区域
         LeftDown 1
         Delay 500
-        MoveTo 966, 705
+        MoveTo 921, 644
         LeftUp 1
         Delay 500
-        MoveTo 932, 727
+        MoveTo 880, 661
         LeftClick 1
         Delay 1000
         MoveTo 1840, 1018//点击发送
         LeftClick 1
         Delay 1000
-        MoveTo 949, 138//关闭交易记录
-        LeftClick 1 
-        Delay 300
-        MoveTo 925, 135//关闭交易记录
+        MoveTo 928, 140//关闭背包
         LeftClick 1 
         Delay 300
     End If
@@ -502,9 +519,12 @@ End Sub
 Sub 查看安全锁
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
-        MoveTo intX, intY //移动到左上方菜单
+        Randomize //初始化随机数生成器。
+        x = Int(((40-19)* Rnd) + 19) 
+        y = Int(((95-64) * Rnd) + 64)
+        MoveTo x, y//移动至展开菜单栏按钮  
         Delay 100
-        LeftClick 1//点击选中 
+        LeftClick 1//点击进入
         Delay 300
         Randomize //初始化随机数生成器。
         x = Int(((205-169)* Rnd) + 169) 
