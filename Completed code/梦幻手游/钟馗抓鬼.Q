@@ -2,10 +2,11 @@
 	未完成：
 	在队伍人数判断中如果4号位暂离会影响判断，待解决
 */
-Dim Obj, Shuang, zdgj
+Dim Obj, Shuang, zdgj,Reallyend
 zdgj = false//自动关机默认为false
 set Obj = createobject("WScript.Shell")
 Shuang = false//双默认为不存在
+Reallyend = false//结束标记为false
 Sub 自动关机
     YN = Obj.Popup("双用完后是否自动关机？", 0, "自动抓鬼", 4)
     If YN = 6 Then //如果点击是
@@ -89,6 +90,9 @@ Sub 站着不动且没任务
         Obj.Run "shutdown /f /s /t 0"
         //调用shutdown命令。 /f--强行关闭应用程序而不提醒， /s--关闭计算机（要重启的话，请把这改成/r[重启计算机]），/t time--在time秒后前闭计算机。
     End If
+    If Shuang = false and zdgj = false Then 
+        Reallyend = true
+    End If
 End Sub
 Sub 一轮
     FindColor 546,442,668,490,"62C1EE",intX,intY
@@ -104,7 +108,6 @@ Sub 一轮
 End Sub//如果出现提示则自动点击传送至钟馗处
 Sub 监测是否正常
     //判断是否在战斗中
-    Shuang = true
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
     Else //不在战斗中
@@ -116,17 +119,40 @@ Sub 监测是否正常
             Delay 1000
         Next
         一轮 //第一步监控是否出现弹窗提醒抓完鬼
-        FindColor 977,187,1021,238,"3DFBFF",intX,intY
-        If intX > 0 And intY > 0 Then //如果不在战斗中但右边有抓鬼任务
+        FindColor 811,134,854,175,"ADE6D0",intX,intY
+        If intX > 0 And intY > 0 Then //如果右边导航栏是显示任务
+            FindColor 977,187,1021,238,"3DFBFF",intX,intY
+            If intX > 0 And intY > 0 Then //如果不在战斗中但右边有抓鬼任务
+                Randomize //初始化随机数生成器。
+                x = Int(((947-838)* Rnd) + 838) 
+                y = Int(((254-205) * Rnd) + 205)
+                MoveTo x, y
+                Delay 100
+                LeftClick 1//点击任务栏自动抓鬼
+                Delay 20000//等20秒
+            Else 
+                站着不动且没任务 
+            End If
+        Else 
             Randomize //初始化随机数生成器。
-            x = Int(((947-838)* Rnd) + 838) 
-            y = Int(((254-205) * Rnd) + 205)
+            x = Int(((894-819)* Rnd) + 819) 
+            y = Int(((171-136) * Rnd) + 136)
             MoveTo x, y
             Delay 100
-            LeftClick 1//点击任务栏自动抓鬼
-            Delay 20000//等20秒
-        Else 
-            站着不动且没任务 
+            LeftClick 1//点亮任务栏
+            Delay 300
+            FindColor 977,187,1021,238,"3DFBFF",intX,intY
+            If intX > 0 And intY > 0 Then //如果不在战斗中但右边有抓鬼任务
+                Randomize //初始化随机数生成器。
+                x = Int(((947-838)* Rnd) + 838) 
+                y = Int(((254-205) * Rnd) + 205)
+                MoveTo x, y
+                Delay 100
+                LeftClick 1//点击任务栏自动抓鬼
+                Delay 20000//等20秒
+            Else 
+                站着不动且没任务 
+            End If
         End If
     End If
     Rem 结束监测
@@ -204,14 +230,13 @@ Sub 接任务
     Rem 结束接任务
 End Sub//自动接任务并开始抓鬼
 Sub 主程序
-    自动关机
+    //自动关机
     Rem 监测
     监测是否正常 
-    If Shuang = false Then //如果双用完了
+    If Reallyend = true Then 
         Goto 结束
-    Else 
-        Goto 监测
     End If
+    Goto 监测
     Rem 结束
 End Sub
 Call 主程序
