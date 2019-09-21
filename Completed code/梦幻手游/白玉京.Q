@@ -47,10 +47,6 @@ t7 = true
 t8 = true
 set Obj = createobject("WScript.Shell")
 Sub 开始
-    If aqs = false Then //如果安全锁是锁着的
-        Call Obj.Popup("安全锁未打开，请打开安全锁后再执行程序！", 5, "白玉京", 48)
-        Goto reallyEnd
-    End If
     //调用“Wscript.Shell”
     UserName=Obj.RegRead("HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\RegisteredOwner")
     // RegRead -- 读取注册表
@@ -257,7 +253,7 @@ Sub 是否自动关机
 End Sub
 Sub 转到商城关注
     FindColor 967,718,1007,755,"3866C0",intX,intY
-    if intX > 0 And intY Then //在战斗中
+    If intX > 0 And intY > 0 Then //在战斗中
         Randomize //初始化随机数生成器。
         x = Int(((40-22)* Rnd) + 22) 
         y = Int(((93-65) * Rnd) + 65)
@@ -409,14 +405,14 @@ Sub 截图
         LeftClick 1//点击
         Delay 800
         FindColor 967,718,1007,755,"3866C0",intX,intY
-        if intX > 0 And intY Then //在战斗中
+        if intX > 0 And intY > 0 Then //在战斗中
             Randomize //初始化随机数生成器。
-        x = Int(((40-19)* Rnd) + 19) 
-        y = Int(((95-64) * Rnd) + 64)
-        MoveTo x, y//移动至展开菜单栏按钮  
-        Delay 100
-        LeftClick 1//点击进入
-        Delay 800
+            x = Int(((40-19)* Rnd) + 19) 
+            y = Int(((95-64) * Rnd) + 64)
+            MoveTo x, y//移动至展开菜单栏按钮  
+            Delay 100
+            LeftClick 1//点击进入
+            Delay 800
             Randomize //初始化随机数生成器。
             x = Int(((64-26)* Rnd) + 26) 
             y = Int(((101-55) * Rnd) + 55)
@@ -518,7 +514,7 @@ Sub 抢购
 End Sub
 Sub 查看安全锁
     FindColor 967,718,1007,755,"3866C0",intX,intY
-    if intX > 0 And intY Then //在战斗中
+    if intX > 0 And intY > 0 Then //在战斗中
         Randomize //初始化随机数生成器。
         x = Int(((40-22)* Rnd) + 22) 
         y = Int(((93-65) * Rnd) + 65)
@@ -593,6 +589,10 @@ Sub 安全锁
 End Sub
 Sub 主程序
     查看安全锁 
+    If aqs = false Then //如果安全锁是锁着的
+        Call Obj.Popup("安全锁未打开，请打开安全锁后再执行程序！", 5, "白玉京", 48)
+        Goto reallyEnd
+    End If
     开始
 End Sub
 Call 主程序
