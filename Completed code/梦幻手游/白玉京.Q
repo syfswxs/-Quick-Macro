@@ -259,12 +259,12 @@ Sub 转到商城关注
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
         Randomize //初始化随机数生成器。
-        x = Int(((40-19)* Rnd) + 19) 
-        y = Int(((95-64) * Rnd) + 64)
+        x = Int(((40-22)* Rnd) + 22) 
+        y = Int(((93-65) * Rnd) + 65)
         MoveTo x, y//移动至展开菜单栏按钮  
         Delay 100
         LeftClick 1//点击进入
-        Delay 300
+        Delay 500
         Randomize //初始化随机数生成器。
         x = Int(((63-27)* Rnd) + 27) 
         y = Int(((258-215) * Rnd) + 215)
@@ -520,8 +520,8 @@ Sub 查看安全锁
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY Then //在战斗中
         Randomize //初始化随机数生成器。
-        x = Int(((40-19)* Rnd) + 19) 
-        y = Int(((95-64) * Rnd) + 64)
+        x = Int(((40-22)* Rnd) + 22) 
+        y = Int(((93-65) * Rnd) + 65)
         MoveTo x, y//移动至展开菜单栏按钮  
         Delay 100
         LeftClick 1//点击进入
