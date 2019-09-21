@@ -2,10 +2,11 @@
 	未完成：
 	在队伍人数判断中如果4号位暂离会影响判断，待解决
 */
-Dim Obj, Shuang, zdgj,Reallyend
+Dim Obj, Shuang, zdgj, Reallyend，PNumber
+PNumber = false//人数默认不够4个
 zdgj = false//自动关机默认为false
 set Obj = createobject("WScript.Shell")
-Shuang = false//双默认为不存在
+Shuang = true//双默认为还有
 Reallyend = false//结束标记为false
 Sub 自动关机
     YN = Obj.Popup("双用完后是否自动关机？", 0, "自动抓鬼", 4)
@@ -60,16 +61,19 @@ Sub 人数情况
     End If
 End Sub
 Sub 双
+	Delay 1000
     Randomize //初始化随机数生成器。
     x = Int(((473-436)* Rnd) + 436) 
     y = Int(((87-46) * Rnd) + 46)
     MoveTo x, y
     Delay 100
     LeftClick 1//点击进入挂机界面
-    Delay 500
+    Delay 1000
     FindColor 554,642,636,687,"0A316C",intX,intY
     If intX > 0 And intY > 0 Then //如果双还存在
         Shuang = true
+        Else 
+        Shuang = false
     End If
     Randomize //初始化随机数生成器。
     x = Int(((971-936)* Rnd) + 936) 
@@ -99,7 +103,7 @@ Sub 一轮
     If intX > 0 And intY > 0 Then //如果出现抓完提示
         MoveTo intX, intY
         LeftClick 1//点击继续抓鬼
-        Delay 1000
+        Delay 3000
         MoveTo 571, 250
         LeftClick 1
         Delay 3000
@@ -108,13 +112,15 @@ Sub 一轮
 End Sub//如果出现提示则自动点击传送至钟馗处
 Sub 监测是否正常
     //判断是否在战斗中
+    Rem 是否战斗
     FindColor 967,718,1007,755,"3866C0",intX,intY
-    if intX > 0 And intY Then //在战斗中
+    If intX > 0 And intY Then //在战斗中
+    	Goto 是否战斗
     Else //不在战斗中
-        For 10//延迟10秒，在等待的过程中判断是否进入战斗
+        For 30//延迟30秒，在等待的过程中判断是否进入战斗
             FindColor 967,718,1007,755,"3866C0",intX,intY
             If intX > 0 And intY Then //如果进入了战斗
-                Goto 结束监测
+                Goto 是否战斗
             End If
             Delay 1000
         Next
@@ -155,9 +161,9 @@ Sub 监测是否正常
             End If
         End If
     End If
-    Rem 结束监测
 End Sub
 Sub 接任务
+	Rem 任务
     Randomize //初始化随机数生成器。
     x = Int(((894-816)* Rnd) + 816) 
     y = Int(((167-135) * Rnd) + 135)
@@ -194,8 +200,7 @@ Sub 接任务
     MoveTo x, y
     Delay 100
     LeftClick 1//点击前往领取
-    Delay 500
-    Rem 对话钟馗
+    Delay 5000
     FindColor 139,542,213,595,"1133FF",intX,intY
     If intX > 0 And intY > 0 Then //如果弹出钟馗对话框
         Randomize //初始化随机数生成器。
@@ -226,11 +231,11 @@ Sub 接任务
         Delay 500
         Goto 结束接任务
     End If
-    Goto 对话钟馗
+    Goto 任务
     Rem 结束接任务
 End Sub//自动接任务并开始抓鬼
 Sub 主程序
-    //自动关机
+    自动关机
     Rem 监测
     监测是否正常 
     If Reallyend = true Then 
