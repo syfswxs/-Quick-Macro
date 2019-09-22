@@ -2,8 +2,7 @@
 	梦幻西游手游自动抢购系统，最多可输入商城珍品公示期倒计时，自动算出抢购时间并抢购，可抢购完后选择自动关机。
 */
 /*
-	未完成： 
-		基本已经完善
+	注意：68级以上玩家适用 
 */
 //*********************************   源代码   *****************************************
 Dim Obj, UserName, NowTime, LenS, Num
@@ -542,7 +541,6 @@ Sub 抢购
     截图
 End Sub
 Sub 查看安全锁
-    Rem 重新查看
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY > 0 Then //在战斗中
         Randomize //初始化随机数生成器。
@@ -571,16 +569,14 @@ Sub 查看安全锁
         FindColor 898,743,916,761,"2022FB",intX,intY
         If intX > 0 And intY > 0 Then //如果下方系统栏展开
             Rem 进入设置
-            FindColor 482,730,933,762,"351727",intX,intY
-			If intX> 0 And intY> 0 Then 
-                MoveTo intX,intY//移动至下方系统栏按钮  
-                Delay 100
-                LeftClick 1//点击进入
-                Delay 300
-                安全锁 
-            Else 
-                Goto 重新查看
-            End If
+            Randomize //初始化随机数生成器。
+            x = Int(((585-545)* Rnd) + 545) 
+            y = Int(((758-732) * Rnd) + 732)
+            MoveTo x, y//移动至下方加号展开按钮  
+            Delay 100
+            LeftClick 1//点击进入
+            Delay 500
+            安全锁 
         Else //如果没有展开
             Randomize //初始化随机数生成器。
             x = Int(((1007-977)* Rnd) + 977) 
