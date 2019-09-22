@@ -365,6 +365,8 @@ Sub 刷新判断
     x = Int(((214-135)* Rnd) + 135) 
     y = Int(((341-298) * Rnd) + 298)
     MoveTo x, y//移动到关注按钮
+    LeftClick 1//点击
+    Delay 800
     Rem 疯狂刷新
     LeftClick 1//点击
     NowTime = Time//获取第一次刷新的当下时间
@@ -569,8 +571,8 @@ Sub 查看安全锁
         FindColor 898,743,916,761,"2022FB",intX,intY
         If intX > 0 And intY > 0 Then //如果下方系统栏展开
             Rem 进入设置
-            FindColor 470,730,946,768,"9E747F",intX,intY
-            If intX > 0 And intY > 0 Then 
+            FindColor 482,730,933,762,"351727",intX,intY
+			If intX> 0 And intY> 0 Then 
                 MoveTo intX,intY//移动至下方系统栏按钮  
                 Delay 100
                 LeftClick 1//点击进入
