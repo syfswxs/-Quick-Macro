@@ -13,7 +13,7 @@ Sub 自动关机
     YN = Obj.Popup("双用完后是否自动关机？", 0, "自动抓鬼", 4)
     If YN = 6 Then //如果点击是
         zdgj = true
-    End If 		
+    End If 
 End Sub
 Sub 双
     Delay 1000
@@ -27,16 +27,17 @@ Sub 双
     FindColor 554,642,636,687,"0A316C",intX,intY
     If intX > 0 And intY > 0 Then //如果双还存在
         Shuang = true
+        Randomize //初始化随机数生成器。
+        x = Int(((971-936)* Rnd) + 936) 
+        y = Int(((156-121) * Rnd) + 121)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1//点击关闭界面
+        Delay 500
     Else 
         Shuang = false
+        Call  Obj.Popup("双没领或已经用完，程序即将进入退出环节", 5, "自动抓鬼", 48)
     End If
-    Randomize //初始化随机数生成器。
-    x = Int(((971-936)* Rnd) + 936) 
-    y = Int(((156-121) * Rnd) + 121)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1//点击关闭界面
-    Delay 500
 End Sub//给出Shuang的值 true为双倍经验还在，false为已经用完
 Sub 站着不动且没任务
     双 //检测是否用完双
@@ -215,7 +216,7 @@ Sub 人数
                 请离p3 
                 Goto 队员状态
             End If
-            FindColor 802,303,863,362,"FBFBFB",intX,intY
+            FindColor 802,303,863,362,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p3离线
                 请离p3 
                 Goto 队员状态
@@ -225,7 +226,7 @@ Sub 人数
                 请离p4 
                 Goto 队员状态
             End If
-            FindColor 804,359,865,423,"FBFBFB",intX,intY
+            FindColor 804,359,865,423,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p4离线
                 请离p4 
                 Goto 队员状态
@@ -235,7 +236,7 @@ Sub 人数
                 请离p5 
                 Goto 队员状态
             End If
-            FindColor 800,415,867,488,"FBFBFB",intX,intY
+            FindColor 800,415,867,488,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p5离线
                 请离p5 
                 Goto 队员状态
@@ -445,7 +446,7 @@ Sub 主程序
         Goto 结束
     End If
     自动关机 
-     Rem 监测
+    Rem 监测
     监测是否正常 
     If Reallyend = true Then 
         Goto 结束
