@@ -1,7 +1,9 @@
 /*
 	基本已经完善
 */
-Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng
+Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp
+//自动匹配默认为false
+zdpp = false
 //等待默认为false
 deng = false
 PNumber = false//人数默认不够4个
@@ -77,9 +79,11 @@ Sub 监测是否正常
         Goto 是否战斗
     Else //不在战斗中
         If deng = true Then 
+            //只要退出战斗就检查一下队伍情况
             For 30//延迟30秒，在等待的过程中判断是否进入战斗
+                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
                 FindColor 967,718,1007,755,"3866C0",intX,intY
-                If intX > 0 And intY Then //如果进入了战斗
+                If intX > 0 or intX1 > 0 Then //如果进入了战斗
                     Goto 是否战斗
                 End If
                 Delay 1000
@@ -95,16 +99,55 @@ Sub 监测是否正常
             FindColor 811,134,854,175,"ADE6D0",intX,intY
             If intX > 0 And intY > 0 Then //如果右边导航栏是显示任务
                 //判断任务栏是否接有捉鬼任务
-                FindColor 800, 182, 1023, 275, "38608D", intX, intY
-                FindColor 800,182,1023,275,"14E351",intX1,intY1
-                If intX> 0 And intY> 0 and intX> 0 And intY> 0 Then//任务栏第一项出现时钟和绿色的字
-                    //点击任务开始自动捉鬼
-                    MoveTo intX1, intY1
+                //点击展开右边任务栏
+                Randomize //初始化随机数生成器。
+                x = Int(((894-819)* Rnd) + 819) 
+                y = Int(((171-136) * Rnd) + 136)
+                MoveTo x, y
+                Delay 100
+                LeftClick 1
+                Delay 800
+                FindColor 320,162,609,451,"06AF08",intX,intY
+                If intX > 0 And intY > 0 Then //如果找到任务
+                    Randomize //初始化随机数生成器。
+                    x = Int(((875-731)* Rnd) + 731) 
+                    y = Int(((685-646) * Rnd) + 646)
+                    MoveTo x, y//点击马上传送
+                    Delay 100
                     LeftClick 1
-                    Delay 1000
-                Else //如果没找到任务
-                    站着不动且没任务
+                    Delay 300
+                    MoveTo 925, 139//点击关闭界面
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    Goto 找到任务
+                Else 
+                    MoveTo 178, 370
+                    LeftClick 1
+                    Delay 800
+                    FindColor 320,162,609,451,"06AF08",intX,intY
+                    If intX > 0 And intY > 0 Then //如果找到任务
+                        Randomize //初始化随机数生成器。
+                        x = Int(((875-731)* Rnd) + 731) 
+                        y = Int(((685-646) * Rnd) + 646)
+                        MoveTo x, y//点击马上传送
+                        Delay 100
+                        LeftClick 1
+                        Delay 300
+                        MoveTo 925, 139//点击关闭界面
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                        Goto 找到任务
+                    Else 
+                        MoveTo 925, 139//点击关闭界面
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                    End If
                 End If
+                站着不动且没任务 
+                Rem 找到任务
             Else //如果显示的是队伍
                 Randomize //初始化随机数生成器。
                 x = Int(((894-819)* Rnd) + 819) 
@@ -178,74 +221,159 @@ Sub 接任务
             LeftClick 1//点击取消
             Delay 500
         End If
+        RightClick 1
+        Delay 300
         Randomize //初始化随机数生成器。
-        x = Int(((947-838)* Rnd) + 838) 
-        y = Int(((254-205) * Rnd) + 205)
+        x = Int(((894-819)* Rnd) + 819) 
+        y = Int(((171-136) * Rnd) + 136)
         MoveTo x, y
         Delay 100
-        LeftClick 1//点击任务栏自动抓鬼
-        Delay 500
-        LeftClick 1//开始抓鬼
-        Delay 500
+        LeftClick 1
+        Delay 800
+        FindColor 320,162,609,451,"06AF08",intX,intY
+                If intX > 0 And intY > 0 Then //如果找到任务
+                    Randomize //初始化随机数生成器。
+                    x = Int(((875-731)* Rnd) + 731) 
+                    y = Int(((685-646) * Rnd) + 646)
+                    MoveTo x, y//点击马上传送
+                    Delay 100
+                    LeftClick 1
+                    Delay 300
+                    MoveTo 925, 139//点击关闭界面
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    Goto 找到任务
+                Else 
+                    MoveTo 178, 370
+                    LeftClick 1
+                    Delay 800
+                    FindColor 320,162,609,451,"06AF08",intX,intY
+                    If intX > 0 And intY > 0 Then //如果找到任务
+                        Randomize //初始化随机数生成器。
+                        x = Int(((875-731)* Rnd) + 731) 
+                        y = Int(((685-646) * Rnd) + 646)
+                        MoveTo x, y//点击马上传送
+                        Delay 100
+                        LeftClick 1
+                        Delay 300
+                        MoveTo 925, 139//点击关闭界面
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                        Goto 找到任务
+                    Else 
+                        MoveTo 925, 139//点击关闭界面
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                    End If
+                End If
+                站着不动且没任务 
+                Rem 找到任务
     Else 
         Goto 钟馗
     End If
 End Sub//自动接任务并开始抓鬼
 Sub 人数
-    //先判断右边任务栏是否展开
+    //右边状态栏是否打开
     FindColor 750,130,792,180,"8FDBFF",intX,intY
     If intX > 0 And intY > 0 Then //是
         Rem 判断队伍
         //判断是否显示的是队伍
         FindColor 918,129,1024,180,"E8C745",intX,intY
         If intX > 0 And intY > 0 Then //是
-            //判断是否有暂离以及离线
+            //检查是否存在暂离/离线
             Rem 队员状态
             FindColor 802,242,868,309,"4ED3FF",intX,intY
             If intX > 0 And intY > 0 Then //p2暂离
+                刹车
                 请离p2 
                 Goto 队员状态
             End If
             FindColor 804,244,865,304,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p2离线
+                刹车
                 请离p2 
                 Goto 队员状态
             End If
             FindColor 804,302,865,362,"4ED3FF",intX,intY
             If intX > 0 And intY > 0 Then //p3暂离
+                刹车
                 请离p3 
                 Goto 队员状态
             End If
             FindColor 802,303,863,362,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p3离线
+                刹车
                 请离p3 
                 Goto 队员状态
             End If
             FindColor 803,362,865,420,"4ED3FF",intX,intY
             If intX > 0 And intY > 0 Then //p4暂离
+                刹车
                 请离p4 
                 Goto 队员状态
             End If
             FindColor 804,359,865,423,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p4离线
+                刹车
                 请离p4 
                 Goto 队员状态
             End If
             FindColor 799,415,867,489,"4ED3FF",intX,intY
             If intX > 0 And intY > 0 Then //p5暂离
+                刹车
                 请离p5 
                 Goto 队员状态
             End If
             FindColor 800,415,867,488,"F5F5F6",intX,intY
             If intX > 0 And intY > 0 Then //p5离线
+                刹车
                 请离p5 
                 Goto 队员状态
             End If
-            //判断4号位是否有人
+            //是否5个人
+            FindColor 859,418,1020,484,"1E43E1",intX,intY
+            If intX > 0 And intY > 0 Then //是
+                PNumber = true
+                zdpp = false
+                Goto 结束人数判断
+            End If
+            //是否够4个玩家
             FindColor 883,371,998,422,"1E43E1",intX,intY
             If intX > 0 And intY > 0 Then //是	
-                //人数够4个
                 PNumber = true
+                //是否处于自动匹配状态
+                If zdpp = true Then //是
+                    //判断任务
+                Else//否
+                    //点开队伍界面
+                    Randomize //初始化随机数生成器。
+                    x = Int(((1009-933)* Rnd) + 933) 
+                    y = Int(((174-139) * Rnd) + 139)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    //点击自动匹配
+                    Randomize //初始化随机数生成器。
+                    x = Int(((917-809)* Rnd) + 809) 
+                    y = Int(((215-181) * Rnd) + 181)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    zdpp = true
+                    //点击关闭队伍信息界面
+                    Randomize //初始化随机数生成器。
+                    x = Int(((944-910)* Rnd) + 910) 
+                    y = Int(((151-118) * Rnd) + 118)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                End If
             Else //否
                 //点开队伍界面
                 Randomize //初始化随机数生成器。
@@ -279,7 +407,7 @@ Sub 人数
                     LeftClick 1
                     Delay 800
                 End If
-            End If
+            End if
         Else //否
             //点击切换到队伍
             Randomize //初始化随机数生成器。
@@ -302,143 +430,243 @@ Sub 人数
         Delay 800
         Goto 判断队伍
     End If
+    Rem 结束人数判断
 End Sub//给出PNumber的值 true为够4个人 false为不够人数
 Sub 请离p2
-    //进入队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((1009-933)* Rnd) + 933) 
-    y = Int(((174-139) * Rnd) + 139)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //点击p2
-    Randomize //初始化随机数生成器。
-    x = Int(((402-251)* Rnd) + 251) 
-    y = Int(((618-249) * Rnd) + 249)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //请离p2
-    Randomize //初始化随机数生成器。
-    x = Int(((665-569)* Rnd) + 569) 
-    y = Int(((425-388) * Rnd) + 388)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //关闭队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((944-910)* Rnd) + 910) 
-    y = Int(((151-118) * Rnd) + 118)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
+    //状态栏是否显示队伍
+    FindColor 918,129,1024,180,"E8C745",intX,intY
+    If intX > 0 And intY > 0 Then //是
+        //进入队伍界面
+        Rem 进入队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //点击p2
+        Randomize //初始化随机数生成器。
+        x = Int(((402-251)* Rnd) + 251) 
+        y = Int(((618-249) * Rnd) + 249)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //请离p2
+        Randomize //初始化随机数生成器。
+        x = Int(((665-569)* Rnd) + 569) 
+        y = Int(((425-388) * Rnd) + 388)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //关闭队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((944-910)* Rnd) + 910) 
+        y = Int(((151-118) * Rnd) + 118)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+    Else 
+        //点击队伍按钮
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 500
+        Goto 进入队伍界面
+    End if
 End Sub
 Sub 请离p3
-    //进入队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((1009-933)* Rnd) + 933) 
-    y = Int(((174-139) * Rnd) + 139)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //点击p3
-    Randomize //初始化随机数生成器。
-    x = Int(((557-446)* Rnd) + 446) 
-    y = Int(((488-280) * Rnd) + 280)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //请离p3
-    Randomize //初始化随机数生成器。
-    x = Int(((836-736)* Rnd) + 736) 
-    y = Int(((427-389) * Rnd) + 389)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //关闭队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((944-910)* Rnd) + 910) 
-    y = Int(((151-118) * Rnd) + 118)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
+    //状态栏是否显示队伍
+    FindColor 918,129,1024,180,"E8C745",intX,intY
+    If intX > 0 And intY > 0 Then //是
+        //进入队伍界面
+        Rem 进入队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //点击p3
+        Randomize //初始化随机数生成器。
+        x = Int(((557-446)* Rnd) + 446) 
+        y = Int(((488-280) * Rnd) + 280)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //请离p3
+        Randomize //初始化随机数生成器。
+        x = Int(((836-736)* Rnd) + 736) 
+        y = Int(((427-389) * Rnd) + 389)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //关闭队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((944-910)* Rnd) + 910) 
+        y = Int(((151-118) * Rnd) + 118)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+    Else 
+        //点击队伍按钮
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 500
+        Goto 进入队伍界面
+    End if
 End Sub
 Sub 请离p4
-    //进入队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((1009-933)* Rnd) + 933) 
-    y = Int(((174-139) * Rnd) + 139)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //点击p4
-    Randomize //初始化随机数生成器。
-    x = Int(((728-626)* Rnd) + 626) 
-    y = Int(((468-311) * Rnd) + 311)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //请离p4
-    Randomize //初始化随机数生成器。
-    x = Int(((559-452)* Rnd) + 452) 
-    y = Int(((432-387) * Rnd) + 387)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //关闭队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((944-910)* Rnd) + 910) 
-    y = Int(((151-118) * Rnd) + 118)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
+    //状态栏是否显示队伍
+    FindColor 918,129,1024,180,"E8C745",intX,intY
+    If intX > 0 And intY > 0 Then //是
+        //进入队伍界面
+        Rem 进入队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //点击p4
+        Randomize //初始化随机数生成器。
+        x = Int(((728-626)* Rnd) + 626) 
+        y = Int(((468-311) * Rnd) + 311)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //请离p4
+        Randomize //初始化随机数生成器。
+        x = Int(((559-452)* Rnd) + 452) 
+        y = Int(((432-387) * Rnd) + 387)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //关闭队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((944-910)* Rnd) + 910) 
+        y = Int(((151-118) * Rnd) + 118)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+    Else 
+        //点击队伍按钮
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 500
+        Goto 进入队伍界面
+    End if
 End Sub
 Sub 请离p5
-    //进入队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((1009-933)* Rnd) + 933) 
-    y = Int(((174-139) * Rnd) + 139)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //点击p5
-    Randomize //初始化随机数生成器。
-    x = Int(((902-790)* Rnd) + 790) 
-    y = Int(((505-322) * Rnd) + 322)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //请离p5
-    Randomize //初始化随机数生成器。
-    x = Int(((728-569)* Rnd) + 625) 
-    y = Int(((427-388) * Rnd) + 388)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
-    //关闭队伍界面
-    Randomize //初始化随机数生成器。
-    x = Int(((944-910)* Rnd) + 910) 
-    y = Int(((151-118) * Rnd) + 118)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1
-    Delay 800
+    //状态栏是否显示队伍
+    FindColor 918,129,1024,180,"E8C745",intX,intY
+    If intX > 0 And intY > 0 Then //是
+        //进入队伍界面
+        Rem 进入队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //点击p5
+        Randomize //初始化随机数生成器。
+        x = Int(((902-790)* Rnd) + 790) 
+        y = Int(((505-322) * Rnd) + 322)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //请离p5
+        Randomize //初始化随机数生成器。
+        x = Int(((728-569)* Rnd) + 625) 
+        y = Int(((427-388) * Rnd) + 388)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+        //关闭队伍界面
+        Randomize //初始化随机数生成器。
+        x = Int(((944-910)* Rnd) + 910) 
+        y = Int(((151-118) * Rnd) + 118)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 800
+    Else 
+        //点击队伍按钮
+        Randomize //初始化随机数生成器。
+        x = Int(((1009-933)* Rnd) + 933) 
+        y = Int(((174-139) * Rnd) + 139)
+        MoveTo x, y
+        Delay 100
+        LeftClick 1
+        Delay 500
+        Goto 进入队伍界面
+    End if
 End Sub
+Sub 刹车
+    //打开地图
+    Randomize //初始化随机数生成器。
+    x = Int(((61-11)* Rnd) + 11) 
+    y = Int(((93-45) * Rnd) + 45)
+    MoveTo x, y
+    Delay 100
+    LeftClick 1//点击地图
+    Delay 800
+    Randomize //初始化随机数生成器。
+    x = Int(((513-443)* Rnd) + 443) 
+    y = Int(((496-440) * Rnd) + 440)
+    MoveTo x, y
+    Delay 100
+    LeftClick 1//点击长安
+    Delay 1000
+    Rem 钟馗
+    Randomize //初始化随机数生成器。
+    x = Int(((179-94)* Rnd) + 94) 
+    y = Int(((98-56) * Rnd) + 56)
+    MoveTo x, y
+    Delay 100
+    LeftClick 1//点击小地图
+    Delay 800
+    Randomize //初始化随机数生成器。
+    x = Int(((331-298)* Rnd) + 298) 
+    y = Int(((480-464) * Rnd) + 464)
+    MoveTo x, y
+    Delay 100
+    LeftClick 1//点击钟馗
+    Delay 5000
+    FindColor 139,542,213,595,"1133FF",intX,intY
+    If intX > 0 And intY > 0 Then //如果弹出钟馗对话框
+        Delay 800
+        RightClick 1
+    Else 
+        Goto 钟馗
+    End If
+End Sub//让人物终止前往目的地并站着不动
 Sub 主程序
     YN = Obj.Popup("注意：双必须是4的倍数，不然会无限抓鬼"&chr (13) &"         助战第一位放孙悟空"&chr (13) &"         队伍设置好行动目标为抓鬼任务以便自动匹配玩家"&chr (13) &"[是]：已设置好，继续"&chr (13) &"[否]：退出程序", 0, "自动抓鬼", 4)
     If YN = 6 Then //如果点击否
