@@ -173,6 +173,10 @@ Sub 开始
             th1 = 0
             t1 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th2 = intNowTimeH and tm2-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -180,6 +184,10 @@ Sub 开始
             th2 = 0
             t2 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th3 = intNowTimeH and tm3-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -187,6 +195,10 @@ Sub 开始
             th3 = 0
             t3 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th4 = intNowTimeH and tm4-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -194,6 +206,10 @@ Sub 开始
             th4 = 0
             t4 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th5 = intNowTimeH and tm5-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -201,6 +217,10 @@ Sub 开始
             th5 = 0
             t5 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th6 = intNowTimeH and tm6-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -208,6 +228,10 @@ Sub 开始
             th6 = 0
             t6 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th7 = intNowTimeH and tm7-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -215,6 +239,10 @@ Sub 开始
             th7 = 0
             t7 = True
         End If
+        NowTime=Time
+        //Time -- 获得当前时间
+        intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
+        intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th8 = intNowTimeH and tm8-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
             Call 抢购
@@ -355,15 +383,14 @@ Sub 刷新判断
         LeftClick 1//点击选中
         购买
         Rem 重复购买
-        FindColor 318,234,362,248,"6BD3FD",intX,intY
-        If intX > 0 And intY > 0 Then //如果选中的物品存在
-            购买 
+        FindColor 377,244,515,283,"A0C3DF",intX,intY
+        If intX > 0 And intY > 0 Then //如果物品不在
+            Goto 结束刷新
+        Else 
+            购买
             If Qbg = true Then 
                 Goto 结束刷新
             End If
-            Goto 重复购买
-        Else 
-            Goto 结束刷新
         End If
         Goto 重复购买//如果没有刷出物品则跳到刷新关注
     End If
@@ -384,9 +411,9 @@ Sub 购买
     MoveTo x, y//移动到确认
     LeftClick 1//点击确定
     Delay 300
-    FindColor 318,234,362,248,"0013C0",intX,intY//如果出现钱不够情况
-    If intX > 0 And intY > 0 Then 
-        MoveTo intX, intY
+    FindColor 385,477,638,530,"C6E370",intX,intY
+    If intX> 0 And intY> 0 Then//如果出现钱不够情况 
+        MoveTo 704, 306
         LeftClick 1
         Qbg = true
     End If
@@ -513,6 +540,7 @@ Sub 抢购
     截图
 End Sub
 Sub 查看安全锁
+    Rem 重新查看
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY > 0 Then //在战斗中
         Randomize //初始化随机数生成器。
@@ -539,15 +567,18 @@ Sub 查看安全锁
         End If
     Else //如果没在战斗中
         FindColor 898,743,916,761,"2022FB",intX,intY
-        If intX> 0 And intY> 0 Then//如果下方系统栏展开
-            Randomize //初始化随机数生成器。
-            x = Int(((587-542)* Rnd) + 542) 
-            y = Int(((770-729) * Rnd) + 729)
-            MoveTo x, y//移动至下方系统栏按钮  
-            Delay 100
-            LeftClick 1//点击进入
-            Delay 300
-            安全锁
+        If intX > 0 And intY > 0 Then //如果下方系统栏展开
+            Rem 进入设置
+            FindColor 470,730,946,768,"9E747F",intX,intY
+            If intX > 0 And intY > 0 Then 
+                MoveTo intX,intY//移动至下方系统栏按钮  
+                Delay 100
+                LeftClick 1//点击进入
+                Delay 300
+                安全锁 
+            Else 
+                Goto 重新查看
+            End If
         Else //如果没有展开
             Randomize //初始化随机数生成器。
             x = Int(((1007-977)* Rnd) + 977) 
@@ -556,14 +587,7 @@ Sub 查看安全锁
             Delay 100
             LeftClick 1//点击进入
             Delay 1000
-            Randomize //初始化随机数生成器。
-            x = Int(((587-542)* Rnd) + 542) 
-            y = Int(((770-729) * Rnd) + 729)
-            MoveTo x, y//移动至下方系统栏按钮  
-            Delay 100
-            LeftClick 1//点击进入
-            Delay 300
-            安全锁
+            Goto 进入设置
         End If
     End If
 End Sub
@@ -591,8 +615,9 @@ Sub 主程序
     查看安全锁 
     If aqs = false Then //如果安全锁是锁着的
         Call Obj.Popup("安全锁未打开，请打开安全锁后再执行程序！", 5, "白玉京", 48)
-        Goto reallyEnd
+        Goto 结束
     End If
-    开始
+    开始 
+    Rem 结束
 End Sub
 Call 主程序
