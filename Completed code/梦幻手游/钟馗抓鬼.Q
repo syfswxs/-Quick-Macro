@@ -78,8 +78,9 @@ Sub 监测是否正常
     If intX > 0 or intX1 > 0 Then //在战斗中
         Goto 是否战斗
     Else //不在战斗中
+    	Delay 3000
+    	一轮 //第一步监控是否出现弹窗提醒抓完鬼
         If deng = true Then 
-            //只要退出战斗就检查一下队伍情况
             For 30//延迟30秒，在等待的过程中判断是否进入战斗
                 FindColor 967,718,1007,755,"1B2F54",intX1,intY1
                 FindColor 967,718,1007,755,"3866C0",intX,intY
@@ -90,7 +91,6 @@ Sub 监测是否正常
             Next
         End If
         deng = true
-        一轮 //第一步监控是否出现弹窗提醒抓完鬼
         //如果没有抓完鬼，又站着不动
         FindColor 750,130,792,180,"8FDBFF",intX,intY
         If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
