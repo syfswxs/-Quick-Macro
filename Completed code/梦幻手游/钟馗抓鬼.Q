@@ -1,7 +1,9 @@
 /*
 	基本已经完善
 */
-Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp
+Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp，rw
+//任务默认为false
+rw=false
 //自动匹配默认为false
 zdpp = false
 //等待默认为false
@@ -42,6 +44,7 @@ Sub 双
     End If
 End Sub//给出Shuang的值 true为双倍经验还在，false为已经用完
 Sub 站着不动且没任务
+	rw = false
     双 //检测是否用完双
     If Shuang = true Then 
         人数 //检测队伍人数
@@ -64,9 +67,9 @@ Sub 一轮
         MoveTo intX, intY
         LeftClick 1//点击继续抓鬼
         Delay 3000
-        MoveTo 571, 250
-        LeftClick 1
-        Delay 3000
+        MoveTo 547, 362
+		RightClick 1
+        Delay 1000
         站着不动且没任务 
     End If
 End Sub//如果出现提示则自动点击传送至钟馗处
@@ -108,8 +111,12 @@ Sub 监测是否正常
                 Delay 100
                 LeftClick 1
                 Delay 800
-                是否在抓鬼
-                站着不动且没任务 
+                是否在抓鬼 
+                If rw = true Then 
+                    Goto 找到任务
+                Else 
+                    站着不动且没任务
+                End If
                 Rem 找到任务
             Else //如果显示的是队伍
                 Randomize //初始化随机数生成器。
@@ -193,9 +200,10 @@ Sub 接任务
         Delay 100
         LeftClick 1
         Delay 800
-        是否在抓鬼
-        站着不动且没任务 
-        Rem 找到任务
+        是否在抓鬼 
+        If rw = false Then 
+			Goto  钟馗
+        End If 
     Else 
         Goto 钟馗
     End If
@@ -629,18 +637,28 @@ Sub 是否在抓鬼
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
-                            x = Int(((268-101)* Rnd) + 101) 
-                            y = Int(((321-272) * Rnd) + 272)
+                            x = Int(((877-734)* Rnd) + 734) 
+                            y = Int(((688-640) * Rnd) + 640)
                             MoveTo x, y//点击马上传送
                             Delay 500 
                             LeftClick 1//点击
+                            Delay 1000
+                            MoveTo 923, 138
+                            LeftClick 1//点击关闭
+                            Delay 300
+                            rw = true
+                            deng = true
+                            Goto 结束检查任务
                         End If
                     End if
                 End If
                 //子菜单第二项是否是子菜单选项
                 FindColor 236,348,286,404,"2960A1",intX,intY
                 FindColor 236,346,287,398,"1D579B",intX1,intY1
-                If intX > 0 OR intX1 > 0 Then//不是
+                If intX > 0 OR intX1 > 0 Then //不是
+                    MoveTo 923, 138
+                    LeftClick 1//点击关闭
+                    Delay 300
                     Goto 结束检查任务
                 Else //是子菜单选项
                     MoveTo 169, 366
@@ -653,17 +671,27 @@ Sub 是否在抓鬼
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
-                            x = Int(((268-101)* Rnd) + 101) 
-                            y = Int(((321-272) * Rnd) + 272)
+                            x = Int(((877-734)* Rnd) + 734) 
+                            y = Int(((688-640) * Rnd) + 640)
                             MoveTo x, y//点击马上传送
                             Delay 500 
                             LeftClick 1//点击
+                            Delay 1000
+                            MoveTo 923, 138
+                            LeftClick 1//点击关闭
+                            Delay 300
+                            rw = true
+                            deng = true
+                            Goto 结束检查任务
                         End If
                     End If
                 End If
                 //子菜单第三项是否是子菜单选项
                 FindColor 239,427,286,472,"215BA2",intX,intY
                 If intX > 0 And intY > 0 Then //不是
+                    MoveTo 923, 138
+                    LeftClick 1//点击关闭
+                    Delay 300
                     Goto 结束检查任务
                 Else //是子菜单选项
                     MoveTo 174, 452
@@ -676,11 +704,18 @@ Sub 是否在抓鬼
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
-                            x = Int(((268-101)* Rnd) + 101) 
-                            y = Int(((321-272) * Rnd) + 272)
+                            x = Int(((877-734)* Rnd) + 734) 
+                            y = Int(((688-640) * Rnd) + 640)
                             MoveTo x, y//点击马上传送
                             Delay 500 
                             LeftClick 1//点击
+                            Delay 1000
+                            MoveTo 923, 138
+                            LeftClick 1//点击关闭
+                            Delay 300
+                            rw = true
+                            deng = true
+                            Goto 结束检查任务
                         End If
                     End If
                 End If  
