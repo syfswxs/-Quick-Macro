@@ -76,6 +76,7 @@ Sub 监测是否正常
     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
     FindColor 967,718,1007,755,"3866C0",intX,intY
     If intX > 0 or intX1 > 0 Then //在战斗中
+    	deng = true
         Goto 是否战斗
     Else //不在战斗中
     	Delay 3000
@@ -90,7 +91,6 @@ Sub 监测是否正常
                 Delay 1000
             Next
         End If
-        deng = true
         //如果没有抓完鬼，又站着不动
         FindColor 750,130,792,180,"8FDBFF",intX,intY
         If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
