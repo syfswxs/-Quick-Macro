@@ -76,11 +76,11 @@ Sub 监测是否正常
     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
     FindColor 967,718,1007,755,"3866C0",intX,intY
     If intX > 0 or intX1 > 0 Then //在战斗中
-    	deng = true
+        deng = true
         Goto 是否战斗
     Else //不在战斗中
-    	Delay 3000
-    	一轮 //第一步监控是否出现弹窗提醒抓完鬼
+        Delay 3000
+        一轮 //第一步监控是否出现弹窗提醒抓完鬼
         If deng = true Then 
             For 30//延迟30秒，在等待的过程中判断是否进入战斗
                 FindColor 967,718,1007,755,"1B2F54",intX1,intY1
@@ -92,6 +92,7 @@ Sub 监测是否正常
             Next
         End If
         //如果没有抓完鬼，又站着不动
+        人数
         FindColor 750,130,792,180,"8FDBFF",intX,intY
         If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
             //是
@@ -103,51 +104,11 @@ Sub 监测是否正常
                 Randomize //初始化随机数生成器。
                 x = Int(((894-819)* Rnd) + 819) 
                 y = Int(((171-136) * Rnd) + 136)
-                MoveTo x, y
+                MoveTo x, y//点击进入任务界面
                 Delay 100
                 LeftClick 1
                 Delay 800
-                FindColor 320,162,609,451,"06AF08",intX,intY
-                If intX > 0 And intY > 0 Then //如果找到任务
-                    Randomize //初始化随机数生成器。
-                    x = Int(((875-731)* Rnd) + 731) 
-                    y = Int(((685-646) * Rnd) + 646)
-                    MoveTo x, y//点击马上传送
-                    deng = true
-                    Delay 100
-                    LeftClick 1
-                    Delay 300
-                    MoveTo 925, 139//点击关闭界面
-                    Delay 100
-                    LeftClick 1
-                    Delay 800
-                    Goto 找到任务
-                Else 
-                    MoveTo 178, 370
-                    LeftClick 1
-                    Delay 800
-                    FindColor 320,162,609,451,"06AF08",intX,intY
-                    If intX > 0 And intY > 0 Then //如果找到任务
-                        Randomize //初始化随机数生成器。
-                        x = Int(((875-731)* Rnd) + 731) 
-                        y = Int(((685-646) * Rnd) + 646)
-                        MoveTo x, y//点击马上传送
-                        deng = true
-                        Delay 100
-                        LeftClick 1
-                        Delay 300
-                        MoveTo 925, 139//点击关闭界面
-                        Delay 100
-                        LeftClick 1
-                        Delay 800
-                        Goto 找到任务
-                    Else 
-                        MoveTo 925, 139//点击关闭界面
-                        Delay 100
-                        LeftClick 1
-                        Delay 800
-                    End If
-                End If
+                是否在抓鬼
                 站着不动且没任务 
                 Rem 找到任务
             Else //如果显示的是队伍
@@ -228,53 +189,13 @@ Sub 接任务
         Randomize //初始化随机数生成器。
         x = Int(((894-819)* Rnd) + 819) 
         y = Int(((171-136) * Rnd) + 136)
-        MoveTo x, y
+        MoveTo x, y//点进任务界面
         Delay 100
         LeftClick 1
         Delay 800
-        FindColor 320,162,609,451,"06AF08",intX,intY
-                If intX > 0 And intY > 0 Then //如果找到任务
-                    Randomize //初始化随机数生成器。
-                    x = Int(((875-731)* Rnd) + 731) 
-                    y = Int(((685-646) * Rnd) + 646)
-                    MoveTo x, y//点击马上传送
-                    deng = true
-                    Delay 100
-                    LeftClick 1
-                    Delay 300
-                    MoveTo 925, 139//点击关闭界面
-                    Delay 100
-                    LeftClick 1
-                    Delay 800
-                    Goto 找到任务
-                Else 
-                    MoveTo 178, 370
-                    LeftClick 1
-                    Delay 800
-                    FindColor 320,162,609,451,"06AF08",intX,intY
-                    If intX > 0 And intY > 0 Then //如果找到任务
-                        Randomize //初始化随机数生成器。
-                        x = Int(((875-731)* Rnd) + 731) 
-                        y = Int(((685-646) * Rnd) + 646)
-                        MoveTo x, y//点击马上传送
-                        deng = true
-                        Delay 100
-                        LeftClick 1
-                        Delay 300
-                        MoveTo 925, 139//点击关闭界面
-                        Delay 100
-                        LeftClick 1
-                        Delay 800
-                        Goto 找到任务
-                    Else 
-                        MoveTo 925, 139//点击关闭界面
-                        Delay 100
-                        LeftClick 1
-                        Delay 800
-                    End If
-                End If
-                站着不动且没任务 
-                Rem 找到任务
+        是否在抓鬼
+        站着不动且没任务 
+        Rem 找到任务
     Else 
         Goto 钟馗
     End If
@@ -671,6 +592,129 @@ Sub 刹车
         Goto 钟馗
     End If
 End Sub//让人物终止前往目的地并站着不动
+Sub 是否在抓鬼
+    //是否显示当前任务
+    FindColor 943,203,986,278,"6795C5",intX,intY
+    If intX > 0 And intY > 0 Then //否
+        Randomize //初始化随机数生成器。
+        x = Int(((986-943)* Rnd) + 943) 
+        y = Int(((278-203) * Rnd) + 203)
+        MoveTo x, y//点击当前任务
+        Delay 500 //延时1秒
+        LeftClick 1//点击
+        Goto 显示当前任务
+    Else //显示当前任务
+        Rem 显示当前任务
+        //第一栏是否是选中状态
+        FindColor 78,190,290,248,"53A9E8",intX,intY
+        If intX> 0 And intY> 0 Then//第一栏被选中
+            //是否展开
+            FindColor 243,200,261,226,"1B569B",intX,intY
+            If intX > 0 And intY > 0 Then //没有展开
+                MoveTo intX, intY
+                LeftClick 1//点击展开
+                Delay 300
+                Goto 子菜单第一栏是否被选中
+            Else //展开
+                //子菜单第一栏是否被选中
+                Rem 子菜单第一栏是否被选中
+                FindColor 99,269,272,328,"71D8FD",intX,intY
+                If intX > 0 And intY > 0 Then //是
+                    Rem 是否有抓鬼任务
+                    //检测是否是抓鬼任务
+                    FindColor 320,162,609,451,"06AF08",intX,intY
+                    If intX > 0 And intY > 0 Then //如果找绿色的字
+                        FindColor 336,375,888,619,"293F5B",intX1,intY1//找到此颜色，不是抓鬼任务
+                        FindColor 573, 343, 912, 485, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
+                        If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
+                        Else //是抓鬼任务
+                            Randomize //初始化随机数生成器。
+                            x = Int(((268-101)* Rnd) + 101) 
+                            y = Int(((321-272) * Rnd) + 272)
+                            MoveTo x, y//点击马上传送
+                            Delay 500 
+                            LeftClick 1//点击
+                        End If
+                    End if
+                End If
+                //子菜单第二项是否是子菜单选项
+                FindColor 236,348,286,404,"2960A1",intX,intY
+                FindColor 236,346,287,398,"1D579B",intX1,intY1
+                If intX > 0 OR intX1 > 0 Then//不是
+                    Goto 结束检查任务
+                Else //是子菜单选项
+                    MoveTo 169, 366
+                    LeftClick 1//点击第二子菜单
+                    Delay 300
+                    FindColor 320,162,609,451,"06AF08",intX,intY
+                    If intX > 0 And intY > 0 Then //如果找绿色的字
+                        FindColor 336,375,888,619,"293F5B",intX1,intY1//找到此颜色，不是抓鬼任务
+                        FindColor 573, 343, 912, 485, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
+                        If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
+                        Else //是抓鬼任务
+                            Randomize //初始化随机数生成器。
+                            x = Int(((268-101)* Rnd) + 101) 
+                            y = Int(((321-272) * Rnd) + 272)
+                            MoveTo x, y//点击马上传送
+                            Delay 500 
+                            LeftClick 1//点击
+                        End If
+                    End If
+                End If
+                //子菜单第三项是否是子菜单选项
+                FindColor 239,427,286,472,"215BA2",intX,intY
+                If intX > 0 And intY > 0 Then //不是
+                    Goto 结束检查任务
+                Else //是子菜单选项
+                    MoveTo 174, 452
+                    LeftClick 1//点击第三子菜单
+                    Delay 300
+                    FindColor 320,162,609,451,"06AF08",intX,intY
+                    If intX > 0 And intY > 0 Then //如果找绿色的字
+                        FindColor 336,375,888,619,"293F5B",intX1,intY1//找到此颜色，不是抓鬼任务
+                        FindColor 573, 343, 912, 485, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
+                        If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
+                        Else //是抓鬼任务
+                            Randomize //初始化随机数生成器。
+                            x = Int(((268-101)* Rnd) + 101) 
+                            y = Int(((321-272) * Rnd) + 272)
+                            MoveTo x, y//点击马上传送
+                            Delay 500 
+                            LeftClick 1//点击
+                        End If
+                    End If
+                End If  
+            End If
+        Else //第一栏没被选中
+            //是否展開
+            FindColor 243,198,262,225,"1F5BA3",intX,intY
+            If intX > 0 And intY > 0 Then //没有展开
+                Randomize //初始化随机数生成器。
+                x = Int(((254-119)* Rnd) + 119) 
+                y = Int(((246-198) * Rnd) + 198)
+                MoveTo x, y//点击第一栏
+                Delay 500 //延时1秒
+                LeftClick 1//点击
+                Randomize //初始化随机数生成器。
+                x = Int(((274-85)* Rnd) + 85) 
+                y = Int(((322-277) * Rnd) + 277)
+                MoveTo x, y//点击子菜单第一个
+                Delay 500 //延时1秒
+                LeftClick 1//点击
+                Goto 是否有抓鬼任务
+            Else //展开
+                Randomize //初始化随机数生成器。
+                x = Int(((274-85)* Rnd) + 85) 
+                y = Int(((322-277) * Rnd) + 277)
+                MoveTo x, y//点击子菜单第一个
+                Delay 500 //延时1秒
+                LeftClick 1//点击
+                Goto 是否有抓鬼任务
+            End If
+        End If
+        Rem 结束检查任务
+    End If
+End Sub
 Sub 主程序
     YN = Obj.Popup("注意：双必须是4的倍数，不然会无限抓鬼"&chr (13) &"         助战第一位放孙悟空"&chr (13) &"         队伍设置好行动目标为抓鬼任务以便自动匹配玩家"&chr (13) &"[是]：已设置好，继续"&chr (13) &"[否]：退出程序", 0, "自动抓鬼", 4)
     If YN = 6 Then //如果点击否
