@@ -113,6 +113,7 @@ Sub 监测是否正常
                     x = Int(((875-731)* Rnd) + 731) 
                     y = Int(((685-646) * Rnd) + 646)
                     MoveTo x, y//点击马上传送
+                    deng = true
                     Delay 100
                     LeftClick 1
                     Delay 300
@@ -131,6 +132,7 @@ Sub 监测是否正常
                         x = Int(((875-731)* Rnd) + 731) 
                         y = Int(((685-646) * Rnd) + 646)
                         MoveTo x, y//点击马上传送
+                        deng = true
                         Delay 100
                         LeftClick 1
                         Delay 300
@@ -236,6 +238,7 @@ Sub 接任务
                     x = Int(((875-731)* Rnd) + 731) 
                     y = Int(((685-646) * Rnd) + 646)
                     MoveTo x, y//点击马上传送
+                    deng = true
                     Delay 100
                     LeftClick 1
                     Delay 300
@@ -254,6 +257,7 @@ Sub 接任务
                         x = Int(((875-731)* Rnd) + 731) 
                         y = Int(((685-646) * Rnd) + 646)
                         MoveTo x, y//点击马上传送
+                        deng = true
                         Delay 100
                         LeftClick 1
                         Delay 300
