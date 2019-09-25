@@ -1,7 +1,11 @@
 /*
 	基本已经完善
 */
-Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp，rw
+Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp，rw, yl, yl1, yl2
+//一轮判定默认为false
+yl = false
+yl1 = false
+yl2 = false
 //任务默认为false
 rw=false
 //自动匹配默认为false
@@ -44,7 +48,7 @@ Sub 双
     End If
 End Sub//给出Shuang的值 true为双倍经验还在，false为已经用完
 Sub 站着不动且没任务
-	rw = false
+    rw = false
     双 //检测是否用完双
     If Shuang = true Then 
         人数 //检测队伍人数
@@ -68,7 +72,7 @@ Sub 一轮
         LeftClick 1//点击继续抓鬼
         Delay 3000
         MoveTo 547, 362
-		RightClick 1
+        RightClick 1
         Delay 1000
         站着不动且没任务 
     End If
@@ -82,16 +86,31 @@ Sub 监测是否正常
         deng = true
         Goto 是否战斗
     Else //不在战斗中
-        Delay 3000
-        一轮 //第一步监控是否出现弹窗提醒抓完鬼
-        If deng = true Then 
-            For 30//延迟30秒，在等待的过程中判断是否进入战斗
-                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
-                FindColor 967,718,1007,755,"3866C0",intX,intY
-                If intX > 0 or intX1 > 0 Then //如果进入了战斗
-                    Goto 是否战斗
-                End If
-                Delay 1000
+        For 2//等2秒
+            Delay 1000
+        Next
+        FindColor 955,719,1024,790,"8EDAFF",intX,intY
+        If intX > 0 And intY > 0 Then //右下角的加号找到
+            yl = false
+        Else 
+            yl = true
+        End If
+        FindColor 934,610,1022,722,"3538E6",intX,intY
+        If intX > 0 And intY > 0 Then //包裹图标找到
+            yl1 = false
+        Else 
+            yl1 = true
+        End If
+        FindColor 858,24,957,80,"234BE1",intX,intY
+        If intX > 0 And intY > 0 Then //任务血条找到
+            yl2 = false
+        Else 
+            yl2 = true
+        End If
+        If yl = true and yl1 = true and yl2 = true Then 
+            For 10
+                一轮 //第一步监控是否出现弹窗提醒抓完鬼,重复检查10遍
+                Delay 500
             Next
         End If
         //如果没有抓完鬼，又站着不动
@@ -100,6 +119,11 @@ Sub 监测是否正常
         If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
             //是
             Rem 是否在抓鬼
+            FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+            FindColor 967,718,1007,755,"3866C0",intX,intY
+            If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                Goto 是否战斗
+            End If
             FindColor 811,134,854,175,"ADE6D0",intX,intY
             If intX > 0 And intY > 0 Then //如果右边导航栏是显示任务
                 //判断任务栏是否接有捉鬼任务
@@ -113,6 +137,16 @@ Sub 监测是否正常
                 Delay 800
                 是否在抓鬼 
                 If rw = true Then 
+                    If deng = true Then 
+                        For 30//延迟30秒，在等待的过程中判断是否进入战斗
+                            FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                            FindColor 967,718,1007,755,"3866C0",intX,intY
+                            If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                                Goto 是否战斗
+                            End If
+                            Delay 1000
+                        Next
+                    End If
                     Goto 找到任务
                 Else 
                     站着不动且没任务
@@ -202,7 +236,7 @@ Sub 接任务
         Delay 800
         是否在抓鬼 
         If rw = false Then 
-			Goto  钟馗
+            Goto  钟馗
         End If 
     Else 
         Goto 钟馗
@@ -562,6 +596,13 @@ Sub 请离p5
     End if
 End Sub
 Sub 刹车
+    Randomize //初始化随机数生成器。
+    x = Int(((985-904)* Rnd) + 904) 
+    y = Int(((620-550) * Rnd) + 550)
+    MoveTo x, y
+    Delay 100
+    LeftClick 1//随机点击地上一点，阻止进入战斗
+    Delay 300
     //打开地图
     Randomize //初始化随机数生成器。
     x = Int(((61-11)* Rnd) + 11) 
@@ -577,28 +618,6 @@ Sub 刹车
     Delay 100
     LeftClick 1//点击长安
     Delay 1000
-    Rem 钟馗
-    Randomize //初始化随机数生成器。
-    x = Int(((179-94)* Rnd) + 94) 
-    y = Int(((98-56) * Rnd) + 56)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1//点击小地图
-    Delay 800
-    Randomize //初始化随机数生成器。
-    x = Int(((331-298)* Rnd) + 298) 
-    y = Int(((480-464) * Rnd) + 464)
-    MoveTo x, y
-    Delay 100
-    LeftClick 1//点击钟馗
-    Delay 5000
-    FindColor 139,542,213,595,"1133FF",intX,intY
-    If intX > 0 And intY > 0 Then //如果弹出钟馗对话框
-        Delay 800
-        RightClick 1
-    Else 
-        Goto 钟馗
-    End If
 End Sub//让人物终止前往目的地并站着不动
 Sub 是否在抓鬼
     //是否显示当前任务
@@ -718,6 +737,9 @@ Sub 是否在抓鬼
                             Goto 结束检查任务
                         End If
                     End If
+                    MoveTo 923, 138
+                    LeftClick 1//点击关闭
+                    Delay 300
                 End If  
             End If
         Else //第一栏没被选中
