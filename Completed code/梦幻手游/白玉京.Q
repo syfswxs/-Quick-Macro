@@ -404,7 +404,7 @@ Sub 购买
     y = Int(((696-660) * Rnd) + 660)
     MoveTo x, y//移动到购买
     LeftClick 1//点击购买
-    Delay 500
+    Delay 200
     //MoveTo 488, 287//移动到关闭
     Randomize //初始化随机数生成器。
     x = Int(((357-285)* Rnd) + 285) 
