@@ -342,37 +342,63 @@ Sub 人数
                     Delay 800
                 End If
             Else //否
-                //点开队伍界面
-                Randomize //初始化随机数生成器。
-                x = Int(((1009-933)* Rnd) + 933) 
-                y = Int(((174-139) * Rnd) + 139)
-                MoveTo x, y
-                Delay 100
-                LeftClick 1
-                Delay 800
-                //点击自动匹配
-                Randomize //初始化随机数生成器。
-                x = Int(((917-809)* Rnd) + 809) 
-                y = Int(((215-181) * Rnd) + 181)
-                MoveTo x, y
-                Delay 100
-                LeftClick 1
-                Delay 800
-                rem 助战判断
-                //判断队伍界面的4号位是否有助战信息
-                FindColor 589,232,669,278,"BAD3E8",intX,intY
-                If intX > 0 And intY > 0 Then //是,不满4人
-                    Goto 助战判断 
-                Else //否，已经满4人	
-                    PNumber = true
-                    //点击关闭队伍信息界面
+                If zdpp = true Then //是
+                    //点开队伍界面
                     Randomize //初始化随机数生成器。
-                    x = Int(((944-910)* Rnd) + 910) 
-                    y = Int(((151-118) * Rnd) + 118)
+                    x = Int(((1009-933)* Rnd) + 933) 
+                    y = Int(((174-139) * Rnd) + 139)
                     MoveTo x, y
                     Delay 100
                     LeftClick 1
                     Delay 800
+                    //判断队伍界面的4号位是否有助战信息
+                    FindColor 589,232,669,278,"BAD3E8",intX,intY
+                    If intX > 0 And intY > 0 Then //是,不满4人
+                        Goto 助战判断 
+                    Else //否，已经满4人	
+                        PNumber = true
+                        //点击关闭队伍信息界面
+                        Randomize //初始化随机数生成器。
+                        x = Int(((944-910)* Rnd) + 910) 
+                        y = Int(((151-118) * Rnd) + 118)
+                        MoveTo x, y
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                    End If
+                Else//否
+                    //点开队伍界面
+                    Randomize //初始化随机数生成器。
+                    x = Int(((1009-933)* Rnd) + 933) 
+                    y = Int(((174-139) * Rnd) + 139)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    //点击自动匹配
+                    Randomize //初始化随机数生成器。
+                    x = Int(((917-809)* Rnd) + 809) 
+                    y = Int(((215-181) * Rnd) + 181)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    rem 助战判断
+                    //判断队伍界面的4号位是否有助战信息
+                    FindColor 589,232,669,278,"BAD3E8",intX,intY
+                    If intX > 0 And intY > 0 Then //是,不满4人
+                        Goto 助战判断 
+                    Else //否，已经满4人	
+                        PNumber = true
+                        //点击关闭队伍信息界面
+                        Randomize //初始化随机数生成器。
+                        x = Int(((944-910)* Rnd) + 910) 
+                        y = Int(((151-118) * Rnd) + 118)
+                        MoveTo x, y
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                    End If
                 End If
             End if
         Else //否
@@ -656,8 +682,8 @@ Sub 是否在抓鬼
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
-                            x = Int(((877-734)* Rnd) + 734) 
-                            y = Int(((688-640) * Rnd) + 640)
+                            x = Int(((863-748)* Rnd) + 748) 
+                            y = Int(((677-647) * Rnd) + 647)
                             MoveTo x, y//点击马上传送
                             Delay 500 
                             LeftClick 1//点击
@@ -690,8 +716,8 @@ Sub 是否在抓鬼
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
-                            x = Int(((877-734)* Rnd) + 734) 
-                            y = Int(((688-640) * Rnd) + 640)
+                            x = Int(((863-748)* Rnd) + 748) 
+                            y = Int(((677-647) * Rnd) + 647)
                             MoveTo x, y//点击马上传送
                             Delay 500 
                             LeftClick 1//点击
@@ -723,8 +749,8 @@ Sub 是否在抓鬼
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
-                            x = Int(((877-734)* Rnd) + 734) 
-                            y = Int(((688-640) * Rnd) + 640)
+                            x = Int(((863-748)* Rnd) + 748) 
+                            y = Int(((677-647) * Rnd) + 647)
                             MoveTo x, y//点击马上传送
                             Delay 500 
                             LeftClick 1//点击
