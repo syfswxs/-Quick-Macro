@@ -1,7 +1,10 @@
 /*
 	基本已经完善
 */
-Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp，rw, yl, yl1, yl2
+Dim Obj, Shuang, zdgj, Reallyend，PNumber，deng, zdpp，rw, yl, yl1, yl2, sc,ks 
+ks = true//用于第一次操作抓鬼指令
+//刹车默认为true
+sc = true
 //一轮判定默认为false
 yl = false
 yl1 = false
@@ -21,6 +24,8 @@ Sub 自动关机
     YN = Obj.Popup("双用完后是否自动关机？", 0, "自动抓鬼", 4)
     If YN = 6 Then //如果点击是
         zdgj = true
+    Else 
+        zdgj = false
     End If 
 End Sub
 Sub 双
@@ -86,9 +91,7 @@ Sub 监测是否正常
         deng = true
         Goto 是否战斗
     Else //不在战斗中
-        For 2//等2秒
-            Delay 1000
-        Next
+        Delay 1500
         FindColor 955,719,1024,790,"8EDAFF",intX,intY
         If intX > 0 And intY > 0 Then //右下角的加号找到
             yl = false
@@ -114,64 +117,127 @@ Sub 监测是否正常
             Next
         End If
         //如果没有抓完鬼，又站着不动
-        人数
-        FindColor 750,130,792,180,"8FDBFF",intX,intY
-        If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
-            //是
-            Rem 是否在抓鬼
-            FindColor 967,718,1007,755,"1B2F54",intX1,intY1
-            FindColor 967,718,1007,755,"3866C0",intX,intY
-            If intX > 0 or intX1 > 0 Then //如果进入了战斗
-                Goto 是否战斗
-            End If
-            FindColor 811,134,854,175,"ADE6D0",intX,intY
-            If intX > 0 And intY > 0 Then //如果右边导航栏是显示任务
-                //判断任务栏是否接有捉鬼任务
+        人数 
+        If ks = true Then 
+            ks = false
+            FindColor 750,130,792,180,"8FDBFF",intX,intY
+            If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
+                //是
+                Rem 是否在抓鬼
+                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                FindColor 967,718,1007,755,"3866C0",intX,intY
+                If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                    Goto 是否战斗
+                End If
+                FindColor 811,134,854,175,"ADE6D0",intX,intY
+                If intX > 0 And intY > 0 Then //如果右边导航栏是显示任务
+                    //判断任务栏是否接有捉鬼任务
+                    //点击展开右边任务栏
+                    Randomize //初始化随机数生成器。
+                    x = Int(((894-819)* Rnd) + 819) 
+                    y = Int(((171-136) * Rnd) + 136)
+                    MoveTo x, y//点击进入任务界面
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    是否在抓鬼 
+                    If rw = true Then 
+                        If deng = true Then 
+                            For 30//延迟30秒，在等待的过程中判断是否进入战斗
+                                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                                FindColor 967,718,1007,755,"3866C0",intX,intY
+                                If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                                    Goto 是否战斗
+                                End If
+                                Delay 1000
+                            Next
+                        End If
+                        Goto 找到任务
+                    Else 
+                        站着不动且没任务
+                    End If
+                    Rem 找到任务
+                Else //如果显示的是队伍
+                    Randomize //初始化随机数生成器。
+                    x = Int(((894-819)* Rnd) + 819) 
+                    y = Int(((171-136) * Rnd) + 136)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1//点亮任务栏
+                    Delay 500
+                    Goto 是否在抓鬼 
+                End If
+            Else //否
                 //点击展开右边任务栏
                 Randomize //初始化随机数生成器。
-                x = Int(((894-819)* Rnd) + 819) 
-                y = Int(((171-136) * Rnd) + 136)
-                MoveTo x, y//点击进入任务界面
-                Delay 100
-                LeftClick 1
-                Delay 800
-                是否在抓鬼 
-                If rw = true Then 
-                    If deng = true Then 
-                        For 30//延迟30秒，在等待的过程中判断是否进入战斗
-                            FindColor 967,718,1007,755,"1B2F54",intX1,intY1
-                            FindColor 967,718,1007,755,"3866C0",intX,intY
-                            If intX > 0 or intX1 > 0 Then //如果进入了战斗
-                                Goto 是否战斗
-                            End If
-                            Delay 1000
-                        Next
-                    End If
-                    Goto 找到任务
-                Else 
-                    站着不动且没任务
-                End If
-                Rem 找到任务
-            Else //如果显示的是队伍
-                Randomize //初始化随机数生成器。
-                x = Int(((894-819)* Rnd) + 819) 
-                y = Int(((171-136) * Rnd) + 136)
+                x = Int(((1013-980)* Rnd) + 980) 
+                y = Int(((175-144) * Rnd) + 144)
                 MoveTo x, y
                 Delay 100
-                LeftClick 1//点亮任务栏
-                Delay 500
-                Goto 是否在抓鬼 
+                LeftClick 1
+                Delay 800 
+                Goto 是否在抓鬼
             End If
-        Else //否
-            //点击展开右边任务栏
-            Randomize //初始化随机数生成器。
-            x = Int(((1013-980)* Rnd) + 980) 
-            y = Int(((175-144) * Rnd) + 144)
-            MoveTo x, y
-            Delay 100
-            LeftClick 1
-            Delay 800 
-            Goto 是否在抓鬼
+        End If
+        If sc = true Then //如果制止了自动寻路
+            FindColor 750,130,792,180,"8FDBFF",intX,intY
+            If intX > 0 And intY > 0 Then //右边队伍/任务栏是否打开
+                //是
+                Rem 是否在抓鬼1
+                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                FindColor 967,718,1007,755,"3866C0",intX,intY
+                If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                    Goto 是否战斗
+                End If
+                FindColor 811,134,854,175,"ADE6D0",intX,intY
+                If intX > 0 And intY > 0 Then //如果右边导航栏是显示任务
+                    //判断任务栏是否接有捉鬼任务
+                    //点击展开右边任务栏
+                    Randomize //初始化随机数生成器。
+                    x = Int(((894-819)* Rnd) + 819) 
+                    y = Int(((171-136) * Rnd) + 136)
+                    MoveTo x, y//点击进入任务界面
+                    Delay 100
+                    LeftClick 1
+                    Delay 800
+                    是否在抓鬼 
+                    If rw = true Then 
+                        If deng = true Then 
+                            For 30//延迟30秒，在等待的过程中判断是否进入战斗
+                                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                                FindColor 967,718,1007,755,"3866C0",intX,intY
+                                If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                                    Goto 是否战斗
+                                End If
+                                Delay 1000
+                            Next
+                        End If
+                        Goto 找到任务1
+                    Else 
+                        站着不动且没任务
+                    End If
+                    Rem 找到任务1
+                Else //如果显示的是队伍
+                    Randomize //初始化随机数生成器。
+                    x = Int(((894-819)* Rnd) + 819) 
+                    y = Int(((171-136) * Rnd) + 136)
+                    MoveTo x, y
+                    Delay 100
+                    LeftClick 1//点亮任务栏
+                    Delay 500
+                    Goto 是否在抓鬼1
+                End If
+            Else //否
+                //点击展开右边任务栏
+                Randomize //初始化随机数生成器。
+                x = Int(((1013-980)* Rnd) + 980) 
+                y = Int(((175-144) * Rnd) + 144)
+                MoveTo x, y
+                Delay 100
+                LeftClick 1
+                Delay 800 
+                Goto 是否在抓鬼
+            End If
         End If
     End If
 End Sub
@@ -309,6 +375,7 @@ Sub 人数
             If intX > 0 And intY > 0 Then //是
                 PNumber = true
                 zdpp = false
+                sc = false
                 Goto 结束人数判断
             End If
             //是否够4个玩家
@@ -317,6 +384,7 @@ Sub 人数
                 PNumber = true
                 //是否处于自动匹配状态
                 If zdpp = true Then //是
+                    sc = false
                     //判断任务
                 Else//否
                     //点开队伍界面
@@ -346,6 +414,7 @@ Sub 人数
                     Delay 800
                 End If
             Else //否
+                刹车
                 If zdpp = true Then //是
                     //点开队伍界面
                     Randomize //初始化随机数生成器。
@@ -355,12 +424,15 @@ Sub 人数
                     Delay 100
                     LeftClick 1
                     Delay 800
+                    LeftClick 1
+                    Delay 800
                     //判断队伍界面的4号位是否有助战信息
                     FindColor 589,232,669,278,"BAD3E8",intX,intY
                     If intX > 0 And intY > 0 Then //是,不满4人
                         Goto 助战判断 
                     Else //否，已经满4人	
                         PNumber = true
+                        sc = false
                         //点击关闭队伍信息界面
                         Randomize //初始化随机数生成器。
                         x = Int(((944-910)* Rnd) + 910) 
@@ -377,6 +449,8 @@ Sub 人数
                     y = Int(((174-139) * Rnd) + 139)
                     MoveTo x, y
                     Delay 100
+                    LeftClick 1
+                    Delay 800
                     LeftClick 1
                     Delay 800
                     //点击自动匹配
@@ -626,6 +700,7 @@ Sub 请离p5
     End if
 End Sub
 Sub 刹车
+    sc = true
     Randomize //初始化随机数生成器。
     x = Int(((985-904)* Rnd) + 904) 
     y = Int(((620-550) * Rnd) + 550)
@@ -682,7 +757,7 @@ Sub 是否在抓鬼
                     FindColor 320,162,609,451,"06AF08",intX,intY
                     If intX > 0 And intY > 0 Then //如果找绿色的字
                         FindColor 336,375,888,619,"293F5B",intX1,intY1//找到此颜色，不是抓鬼任务
-                        FindColor 639,344,912,400, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
+                        FindColor 632,314,901,416, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
@@ -715,8 +790,8 @@ Sub 是否在抓鬼
                     Delay 300
                     FindColor 320,162,609,451,"06AF08",intX,intY
                     If intX > 0 And intY > 0 Then //如果找绿色的字
-                        FindColor 336,375,888,619,"293F5B",intX1,intY1//找到此颜色，不是抓鬼任务
-                        FindColor 573, 343, 912, 485, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
+                        FindColor 633, 320, 901, 428, "233955", intX1, intY1//找到此颜色，不是抓鬼任务
+                        FindColor 333,378,747,492,"233955",intX2,intY2//找到此颜色，不是抓鬼任务
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
