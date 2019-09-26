@@ -177,16 +177,17 @@ Sub 监测是否正常
 End Sub
 Sub 接任务
     //打开地图
+    Rem 地图
     Randomize //初始化随机数生成器。
     x = Int(((61-11)* Rnd) + 11) 
     y = Int(((93-45) * Rnd) + 45)
     MoveTo x, y
     Delay 100
     LeftClick 1//点击地图
-    Delay 800
+    Delay 1000
     Randomize //初始化随机数生成器。
-    x = Int(((513-443)* Rnd) + 443) 
-    y = Int(((496-440) * Rnd) + 440)
+    x = Int(((506-453)* Rnd) + 453) 
+    y = Int(((500-454) * Rnd) + 454)
     MoveTo x, y
     Delay 100
     LeftClick 1//点击长安
@@ -238,8 +239,11 @@ Sub 接任务
         If rw = false Then 
             Goto  钟馗
         End If 
-    Else 
-        Goto 钟馗
+    Else //如果没弹出钟馗对话框，则是小地图错误
+    	MoveTo 950, 149
+		LeftClick 1//点击关闭小地图
+        Delay 800
+        Goto 地图
     End If
 End Sub//自动接任务并开始抓鬼
 Sub 人数
