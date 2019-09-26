@@ -240,8 +240,8 @@ Sub 接任务
             Goto  钟馗
         End If 
     Else //如果没弹出钟馗对话框，则是小地图错误
-    	MoveTo 950, 149
-		LeftClick 1//点击关闭小地图
+        MoveTo 950, 149
+        LeftClick 1//点击关闭小地图
         Delay 800
         Goto 地图
     End If
@@ -682,7 +682,7 @@ Sub 是否在抓鬼
                     FindColor 320,162,609,451,"06AF08",intX,intY
                     If intX > 0 And intY > 0 Then //如果找绿色的字
                         FindColor 336,375,888,619,"293F5B",intX1,intY1//找到此颜色，不是抓鬼任务
-                        FindColor 573, 343, 912, 485, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
+                        FindColor 639,344,912,400, "293F5B", intX2, intY2//找到此颜色，不是抓鬼任务
                         If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
                         Else //是抓鬼任务
                             Randomize //初始化随机数生成器。
