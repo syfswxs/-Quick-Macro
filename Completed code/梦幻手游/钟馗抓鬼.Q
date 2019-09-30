@@ -779,7 +779,39 @@ Sub 是否在抓鬼
                 //子菜单第二项是否是子菜单选项
                 FindColor 236,348,286,404,"2960A1",intX,intY
                 FindColor 236,346,287,398,"1D579B",intX1,intY1
-                If intX > 0 OR intX1 > 0 Then //不是
+                If intX > 0 OR intX1 > 0 Then //是二级菜单
+                    //是否展开
+                    FindColor 244,350,262,378,"1D579B",intX,intY
+                    If intX > 0 And intY > 0 Then //没有展开
+                        MoveTo 169, 366
+                        LeftClick 1//点击展开
+                        Delay 300
+                        MoveTo 177, 446
+                        LeftClick 1//点击二级菜单下的第一个子菜单
+                        Delay 300
+                        FindColor 320,162,609,451,"06AF08",intX,intY
+                        If intX > 0 And intY > 0 Then //如果找绿色的字
+                            FindColor 633, 320, 901, 428, "233955", intX1, intY1//找到此颜色，不是抓鬼任务
+                            FindColor 333,378,747,492,"233955",intX2,intY2//找到此颜色，不是抓鬼任务
+                            If intX1 > 0 or intX2 > 0 Then //不是抓鬼任务
+                            Else //是抓鬼任务
+                                Randomize //初始化随机数生成器。
+                                x = Int(((863-748)* Rnd) + 748) 
+                                y = Int(((677-647) * Rnd) + 647)
+                                MoveTo x, y//点击马上传送
+                                Delay 500 
+                                LeftClick 1//点击
+                                Delay 1000
+                                MoveTo 923, 138
+                                LeftClick 1//点击关闭
+                                Delay 300
+                                rw = true
+                                deng = true
+                                Goto 结束检查任务
+                            End If
+                            Else//如果找不到抓鬼任务 
+                        End If 
+                    End If
                     MoveTo 923, 138
                     LeftClick 1//点击关闭
                     Delay 300
