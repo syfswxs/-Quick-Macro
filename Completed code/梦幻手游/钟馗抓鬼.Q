@@ -92,7 +92,7 @@ Sub 监测是否正常
         ks = false
         Goto 是否战斗
     Else //不在战斗中
-        Delay 1500
+        Delay 2000
         FindColor 955,719,1024,790,"8EDAFF",intX,intY
         If intX > 0 And intY > 0 Then //右下角的加号找到
             yl = false
@@ -117,7 +117,7 @@ Sub 监测是否正常
                 Delay 500
             Next
         End If
-            有弹窗 
+        有弹窗 
         //如果没有抓完鬼，又站着不动
         人数 
         If ks = true Then 
@@ -180,6 +180,16 @@ Sub 监测是否正常
                 Delay 800 
                 Goto 是否在抓鬼
             End If
+        End If
+        If deng = true Then 
+            For 30//延迟30秒，在等待的过程中判断是否进入战斗
+                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                FindColor 967,718,1007,755,"3866C0",intX,intY
+                If intX > 0 or intX1 > 0 Then //如果进入了战斗
+                    Goto 是否战斗
+                End If
+                Delay 1000
+            Next
         End If
         If sc = true Then //如果制止了自动寻路
             FindColor 750,130,792,180,"8FDBFF",intX,intY
@@ -377,6 +387,7 @@ Sub 人数
             //是否5个人
             FindColor 859,418,1020,484,"1E43E1",intX,intY
             If intX > 0 And intY > 0 Then //是
+            	deng = true
                 PNumber = true
                 zdpp = false
                 sc = false
