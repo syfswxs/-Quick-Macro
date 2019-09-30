@@ -89,6 +89,7 @@ Sub 监测是否正常
     FindColor 967,718,1007,755,"3866C0",intX,intY
     If intX > 0 or intX1 > 0 Then //在战斗中
         deng = true
+        ks = false
         Goto 是否战斗
     Else //不在战斗中
         Delay 1500
@@ -116,6 +117,7 @@ Sub 监测是否正常
                 Delay 500
             Next
         End If
+            有弹窗 
         //如果没有抓完鬼，又站着不动
         人数 
         If ks = true Then 
@@ -165,7 +167,7 @@ Sub 监测是否正常
                     Delay 100
                     LeftClick 1//点亮任务栏
                     Delay 500
-                    Goto 是否在抓鬼 
+                    Goto 是否在抓鬼
                 End If
             Else //否
                 //点击展开右边任务栏
@@ -236,7 +238,7 @@ Sub 监测是否正常
                 Delay 100
                 LeftClick 1
                 Delay 800 
-                Goto 是否在抓鬼
+                Goto 是否在抓鬼1
             End If
         End If
     End If
@@ -264,6 +266,8 @@ Sub 接任务
     y = Int(((98-56) * Rnd) + 56)
     MoveTo x, y
     Delay 100
+    LeftClick 1//点击小地图
+    Delay 300
     LeftClick 1//点击小地图
     Delay 800
     Randomize //初始化随机数生成器。
@@ -809,7 +813,7 @@ Sub 是否在抓鬼
                                 deng = true
                                 Goto 结束检查任务
                             End If
-                            Else//如果找不到抓鬼任务 
+                        Else//如果找不到抓鬼任务 
                         End If 
                     End If
                     MoveTo 923, 138
@@ -907,6 +911,18 @@ Sub 是否在抓鬼
             End If
         End If
         Rem 结束检查任务
+    End If
+End Sub
+Sub 有弹窗
+    FindColor 546,442,668,490,"62C1EE",intX,intY
+    If intX > 0 And intY > 0 Then //如果出现弹窗提示
+        FindColor 859,27,943,66,"0E1F5D",intX,intY
+        If intX > 0 And intY > 0 Then //如果出现队伍人数不够弹窗提示
+            MoveTo intX, intY
+            LeftClick 1//点击自动匹配
+            Delay 500
+            zdpp = true
+        End If
     End If
 End Sub
 Sub 主程序
