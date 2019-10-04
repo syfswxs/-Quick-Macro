@@ -801,6 +801,7 @@ Sub 是否在抓鬼
                         MoveTo 169, 366
                         LeftClick 1//点击展开
                         Delay 300
+                        Rem 查看二级菜单下的第一个子菜单
                         MoveTo 177, 446
                         LeftClick 1//点击二级菜单下的第一个子菜单
                         Delay 300
@@ -825,7 +826,9 @@ Sub 是否在抓鬼
                                 Goto 结束检查任务
                             End If
                         Else//如果找不到抓鬼任务 
-                        End If 
+                        End If
+                         Else 
+                         Goto 查看二级菜单下的第一个子菜单
                     End If
                     MoveTo 923, 138
                     LeftClick 1//点击关闭
