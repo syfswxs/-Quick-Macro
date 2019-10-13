@@ -377,23 +377,30 @@ Sub 刷新判断
         Xj = true
         Goto 结束刷新
     End If
+    rem 监测是否刷出
     FindColor 318,234,362,248,"D3E3F0",intX,intY
     If intX> 0 And intY> 0 Then//如果刷出物品
-        MoveTo intX, intY+5 //选中物品
+        MoveTo intX+100, intY+30 //选中物品
         Delay 100
         LeftClick 1//点击选中
-        购买
-        Rem 重复购买
-        FindColor 377,244,515,283,"A0C3DF",intX,intY
-        If intX > 0 And intY > 0 Then //如果物品不在
-            Goto 结束刷新
-        Else 
+        Delay 200
+        FindColor 389,235,445,258,"6FD6FD",intX,intY
+        If intX > 0 And intY > 0 Then //如果已经被选中
             购买
-            If Qbg = true Then 
+            Rem 重复购买
+            FindColor 377,244,515,283,"A0C3DF",intX,intY
+            If intX > 0 And intY > 0 Then //如果物品不在
                 Goto 结束刷新
+            Else 
+                购买
+                If Qbg = true Then 
+                    Goto 结束刷新
+                End If
             End If
+            Goto 重复购买//如果没有刷出物品则跳到刷新关注
+        Else 
+            Goto 监测是否刷出
         End If
-        Goto 重复购买//如果没有刷出物品则跳到刷新关注
     End If
     Goto 疯狂刷新
     Rem 结束刷新
@@ -600,6 +607,7 @@ Sub 安全锁
     FindColor 753,444,778,467,"2956FF",intX,intY
     If intX > 0 And intY > 0 Then //如果安全锁是关闭状态
         aqs = true//安全锁已打开
+        Delay 800
         Randomize //初始化随机数生成器。
         x = Int(((949-908)* Rnd) + 908) 
         y = Int(((156-120) * Rnd) + 120)
