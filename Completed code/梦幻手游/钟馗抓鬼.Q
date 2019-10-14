@@ -32,6 +32,12 @@ Sub 是否战斗
                 LeftClick 1//点击进入挂机界面
                 Delay 1000
                 //双是否还在
+                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                FindColor 967,718,1007,755,"3866C0",intX,intY
+                If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+                    sc = false
+                    Goto 战斗监测
+                End If
                 FindColor 554,642,636,687,"0A316C",intX,intY
                 If intX > 0 And intY > 0 Then //是
                     Randomize //初始化随机数生成器。
@@ -43,6 +49,12 @@ Sub 是否战斗
                     Delay 1000
                     检查队伍状况 
                 Else //否
+                    FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                    FindColor 967,718,1007,755,"3866C0",intX,intY
+                    If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+                        sc = false
+                        Goto 战斗监测
+                    End If
                     shuang = false
                     //结束脚本
                     Goto 脚本结束
@@ -242,6 +254,7 @@ Sub 检查队伍状况
                             Delay 100
                             LeftClick 1
                             Delay 800
+                            任务
                         End If
                     Else //否
                         //点击展开右边信息栏
@@ -667,6 +680,17 @@ Sub 战斗等待
         If intX > 0 or intX1 > 0 Then //如果进入了战斗
             Goto 等待结束
         End If
+        FindColor 496,398,718,537,"63C2EE",intX,intY
+        If intX > 0 And intY > 0 Then //如果出现了人数不足弹窗
+            //点击确定补人
+            Randomize //初始化随机数生成器。
+            x = Int(((641-565)* Rnd) + 565) 
+            y = Int(((501-466) * Rnd) + 466)
+            MoveTo x, y
+            Delay 500 
+            LeftClick 1//点击
+            Delay 300
+        End If
         Delay 1000
     Next
     Rem 等待结束
@@ -712,6 +736,7 @@ Sub 点击任务栏
                         Delay 300
                         sc = false
                         jrw = false
+                        战斗等待
                     End If
                 Else //不是抓鬼任务
                     Rem 三字
@@ -752,6 +777,7 @@ Sub 点击任务栏
                                     Delay 300
                                     sc = false
                                     jrw = false
+                                    战斗等待
                                 End If
                             Else //否
                                 //判断第四栏是否有字
@@ -799,6 +825,7 @@ Sub 点击任务栏
                                             Delay 300
                                             sc = false
                                             jrw = false
+                                            战斗等待
                                         End If
                                     Else //否
                                         //判断第五栏是否有字
@@ -839,6 +866,7 @@ Sub 点击任务栏
                                                         Delay 300
                                                         sc = false
                                                         jrw = false
+                                                        战斗等待
                                                     End If
                                                 Else //否
                                                     Rem 五关
