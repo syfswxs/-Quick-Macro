@@ -1,10 +1,9 @@
-Dim Obj, sc, zdpp，jrw，zdgj，shuang
+Dim Obj, sc,jrw，zdgj，shuang
 Set Obj = createobject("WScript.Shell")
 shuang = true//双默认存在
 zdgj = false//自动关机默认为否
 jrw =false//接任务默认为false
 sc = true//刹车默认为真
-zdpp = false//自动匹配默认为假
 Sub 是否战斗
     Rem 战斗监测
     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
@@ -159,7 +158,6 @@ Sub 检查队伍状况
             //是否满5个人
             FindColor 859,418,1020,484,"1E43E1",intX,intY
             If intX > 0 And intY > 0 Then //是
-                zdpp = false
                 //是否刹车状态
                 If sc = true Then //是
                     任务 
@@ -176,97 +174,92 @@ Sub 检查队伍状况
                 End If
                 FindColor 883,371,998,422,"1E43E1",intX,intY
                 If intX > 0 And intY > 0 Then //是	
-                    //是否处于自动匹配状态
-                    Rem 自动匹配判断
+                    //右侧信息栏是否打开
+                    Rem 信息栏是否打开
                     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
                     FindColor 967,718,1007,755,"3866C0",intX,intY
                     If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
                         sc = false
                         Goto 结束检查队伍状况
                     End If
-                    If zdpp = true Then //是
-                        //是否是刹车状态
-                        If sc = true Then //是
-                            任务 
-                        Else //不是
-                            战斗等待
-                        End If
-                    Else //不是
-                        //右侧信息栏是否打开
-                        Rem 信息栏是否打开
+                    FindColor 750,130,792,180,"8FDBFF",intX,intY
+                    If intX > 0 And intY > 0 Then //是
+                        //是否显示队伍信息
+                        Rem 队伍信息
                         FindColor 967,718,1007,755,"1B2F54",intX1,intY1
                         FindColor 967,718,1007,755,"3866C0",intX,intY
                         If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
                             sc = false
                             Goto 结束检查队伍状况
                         End If
-                        FindColor 750,130,792,180,"8FDBFF",intX,intY
-                        If intX > 0 And intY > 0 Then //是
-                            //是否显示队伍信息
-                            Rem 队伍信息
-                            FindColor 811,134,854,175,"ADE6D0",intX,intY
-                            If intX > 0 And intY > 0 Then //否
-                                //点击显示队伍信息
-                                Randomize //初始化随机数生成器。
-                                x = Int(((1009-933)* Rnd) + 933) 
-                                y = Int(((174-139) * Rnd) + 139)
-                                MoveTo x, y
-                                Delay 100
-                                LeftClick 1
-                                Delay 800
-                                Goto 队伍信息
-                            Else //是
-                                //点击进入队伍界面
-                                FindColor 967,718,1007,755,"1B2F54",intX1,intY1
-                                FindColor 967,718,1007,755,"3866C0",intX,intY
-                                If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
-                                    sc = false
-                                    Goto 结束检查队伍状况
-                                End If
-                                Randomize //初始化随机数生成器。
-                                x = Int(((1009-933)* Rnd) + 933) 
-                                y = Int(((174-139) * Rnd) + 139)
-                                MoveTo x, y
-                                Delay 100
-                                LeftClick 1
-                                Delay 800
-                                //点击自动匹配
-                                Randomize //初始化随机数生成器。
-                                x = Int(((917-809)* Rnd) + 809) 
-                                y = Int(((215-181) * Rnd) + 181)
-                                MoveTo x, y
-                                Delay 100
-                                LeftClick 1
-                                Delay 800
-                                zdpp = true
-                                //点击关闭队伍信息界面
-                                Randomize //初始化随机数生成器。
-                                x = Int(((944-910)* Rnd) + 910) 
-                                y = Int(((151-118) * Rnd) + 118)
-                                MoveTo x, y
-                                Delay 100
-                                LeftClick 1
-                                Delay 800
-                                Goto 自动匹配判断
-                            End If
-                        Else //否
-                            //点击展开右边信息栏
+                        FindColor 811,134,854,175,"ADE6D0",intX,intY
+                        If intX > 0 And intY > 0 Then //否
+                            //点击显示队伍信息
+                            Randomize //初始化随机数生成器。
+                            x = Int(((1009-933)* Rnd) + 933) 
+                            y = Int(((174-139) * Rnd) + 139)
+                            MoveTo x, y
+                            Delay 100
+                            LeftClick 1
+                            Delay 800
+                            Goto 队伍信息
+                        Else //是
                             FindColor 967,718,1007,755,"1B2F54",intX1,intY1
                             FindColor 967,718,1007,755,"3866C0",intX,intY
                             If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
                                 sc = false
                                 Goto 结束检查队伍状况
                             End If
+                            //点击进入队伍界面
                             Randomize //初始化随机数生成器。
-                            x = Int(((1013-980)* Rnd) + 980) 
-                            y = Int(((175-144) * Rnd) + 144)
+                            x = Int(((1009-933)* Rnd) + 933) 
+                            y = Int(((174-139) * Rnd) + 139)
                             MoveTo x, y
                             Delay 100
                             LeftClick 1
                             Delay 800
-                            Goto 信息栏是否打开
-                        End if
-                    End If
+                            //点击进入队伍编辑界面
+                            Randomize //初始化随机数生成器。
+                            x = Int(((715-684)* Rnd) + 684) 
+                            y = Int(((208-180) * Rnd) + 180)
+                            MoveTo x, y
+                            Delay 100
+                            LeftClick 1
+                            Delay 800
+                            //点击确定触发自动匹配
+                            Randomize //初始化随机数生成器。
+                            x = Int(((687-596)* Rnd) + 596) 
+                            y = Int(((699-661) * Rnd) + 661)
+                            MoveTo x, y
+                            Delay 100
+                            LeftClick 1
+                            Delay 800
+                            //点击关闭队伍信息界面
+                            Randomize //初始化随机数生成器。
+                            x = Int(((944-910)* Rnd) + 910) 
+                            y = Int(((151-118) * Rnd) + 118)
+                            MoveTo x, y
+                            Delay 100
+                            LeftClick 1
+                            Delay 800
+                        End If
+                    Else //否
+                        //点击展开右边信息栏
+                        FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                        FindColor 967,718,1007,755,"3866C0",intX,intY
+                        If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+                            sc = false
+                            Goto 结束检查队伍状况
+                        End If
+                        Randomize //初始化随机数生成器。
+                        x = Int(((1013-980)* Rnd) + 980) 
+                        y = Int(((175-144) * Rnd) + 144)
+                        MoveTo x, y
+                        Delay 100
+                        LeftClick 1
+                        Delay 800
+                        Goto 信息栏是否打开
+                    End if
                 Else //否
                     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
                     FindColor 967,718,1007,755,"3866C0",intX,intY
@@ -307,35 +300,68 @@ Sub 检查队伍状况
                             Delay 100
                             LeftClick 1
                             Delay 800
-                            //自动匹配的状态
-                            If zdpp = true Then //开启状态
-                                //判断队伍界面是否满4个人
-                                Rem 是否满4人
-                                FindColor 589,232,669,278,"BAD3E8",intX,intY
-                                If intX > 0 And intY > 0 Then //否,不满4人
-                                    Goto 是否满4人
-                                Else //是
-                                    //点击关闭队伍信息界面
-                                    Randomize //初始化随机数生成器。
-                                    x = Int(((944-910)* Rnd) + 910) 
-                                    y = Int(((151-118) * Rnd) + 118)
-                                    MoveTo x, y
-                                    Delay 100
-                                    LeftClick 1
-                                    Delay 800
-                                    任务
-                                End If
-                            Else //关闭状态
-                                //点击自动匹配
+                            //点击进入队伍编辑界面
+                            Randomize //初始化随机数生成器。
+                            x = Int(((715-684)* Rnd) + 684) 
+                            y = Int(((208-180) * Rnd) + 180)
+                            MoveTo x, y
+                            Delay 100
+                            LeftClick 1
+                            Delay 800
+                            //点击确定触发自动匹配
+                            Randomize //初始化随机数生成器。
+                            x = Int(((687-596)* Rnd) + 596) 
+                            y = Int(((699-661) * Rnd) + 661)
+                            MoveTo x, y
+                            Delay 100
+                            LeftClick 1
+                            Delay 800
+                            //判断队伍界面是否满4个人
+                            Rem 是否满4人
+                            FindColor 589,232,669,278,"BAD3E8",intX,intY
+                            If intX > 0 And intY > 0 Then //否,不满4人
+                                //点击一键喊话
                                 Randomize //初始化随机数生成器。
-                                x = Int(((917-809)* Rnd) + 809) 
-                                y = Int(((215-181) * Rnd) + 181)
+                                x = Int(((915-779)* Rnd) + 779) 
+                                y = Int(((700-660) * Rnd) + 660)
                                 MoveTo x, y
                                 Delay 100
                                 LeftClick 1
                                 Delay 800
-                                zdpp = true
+                                //点击组队频道
+                                Randomize //初始化随机数生成器。
+                                x = Int(((902-785)* Rnd) + 785) 
+                                y = Int(((615-571) * Rnd) + 571)
+                                MoveTo x, y
+                                Delay 100
+                                LeftClick 1
+                                Delay 800
+                                Randomize //初始化随机数生成器。
+                                x = Int(((915-779)* Rnd) + 779) 
+                                y = Int(((700-660) * Rnd) + 660)
+                                MoveTo x, y
+                                Delay 100
+                                LeftClick 1
+                                Delay 800
+                                //点击当前频道
+                                Randomize //初始化随机数生成器。
+                                x = Int(((897-786)* Rnd) + 786) 
+                                y = Int(((475-429) * Rnd) + 429)
+                                MoveTo x, y
+                                Delay 100
+                                LeftClick 1
+                                Delay 800
                                 Goto 是否满4人
+                            Else //是
+                                //点击关闭队伍信息界面
+                                Randomize //初始化随机数生成器。
+                                x = Int(((944-910)* Rnd) + 910) 
+                                y = Int(((151-118) * Rnd) + 118)
+                                MoveTo x, y
+                                Delay 100
+                                LeftClick 1
+                                Delay 800
+                                任务
                             End If
                         End If
                     Else //否
