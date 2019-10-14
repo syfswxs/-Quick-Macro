@@ -31,7 +31,7 @@ Sub 是否有弹窗
         MoveTo x, y//点击宣读
         Delay 100
         LeftClick 1
-        Delay 5000
+        Delay 500
         Goto 结束弹窗
     End If
     FindColor 612,63,859,185,"292FE0",intX,intY
@@ -78,6 +78,25 @@ Sub 是否有弹窗
         Delay 800
         Goto 结束弹窗
     End If
+    Rem 上交
+    FindColor 711,187,938,235,"9BC9E8",intX,intY
+    FindColor 762,590,887,639,"63C3EF",intX1,intY1
+    If intX > 0 And intY1 > 0 Then //监控出上交弹窗
+        Randomize 
+        x = Int(((877-774)* Rnd) + 774) 
+        y = Int(((634-596) * Rnd) + 596)
+        MoveTo x, y//点击上交
+        Delay 100
+        LeftClick 1
+        Delay 800
+        FindColor 711,187,938,235,"9BC9E8",intX,intY
+        FindColor 762,590,887,639,"63C3EF",intX1,intY1
+        If intX > 0 And intY1 > 0 Then //如果上交弹窗还在
+            Goto 上交
+        Else 
+            Goto 结束弹窗
+        End If
+    End If
     FindColor 798,121,924,147,"4288D4",intX1,intY1
     FindColor 349,104,730,152,"FFFFFF",intX,intY
     If intX > 0 And intX1 > 0 Then ////监测出药店
@@ -97,25 +116,6 @@ Sub 是否有弹窗
         If intX > 0 And intY > 0 Then //有对话选项
             MoveTo intX - 50, intY + 5
             LeftClick 1//点击第一项
-            Delay 800
-            //是否出现上交弹窗
-            Rem 上交
-            FindColor 711,187,938,235,"9BC9E8",intX,intY
-            FindColor 762,590,887,639,"63C3EF",intX1,intY1
-            If intX > 0 And intY1 > 0 Then //出现上交弹窗
-                Randomize 
-                x = Int(((877-774)* Rnd) + 774) 
-                y = Int(((634-596) * Rnd) + 596)
-                MoveTo x, y//点击上交
-                Delay 100
-                LeftClick 1
-                Delay 800
-                FindColor 711,187,938,235,"9BC9E8",intX,intY
-                FindColor 762,590,887,639,"63C3EF",intX1,intY1
-                If intX > 0 And intY1 > 0 Then //如果上交弹窗还在
-                    Goto 上交
-                End If
-            End If
             Delay 800
             Goto 结束弹窗
         Else //没有对话选项
