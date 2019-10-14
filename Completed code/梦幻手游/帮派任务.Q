@@ -1,28 +1,3 @@
-[General]
-SyntaxVersion=2
-BeginHotkey=121
-BeginHotkeyMod=0
-PauseHotkey=122
-PauseHotkeyMod=0
-StopHotkey=123
-StopHotkeyMod=0
-RunOnce=1
-EnableWindow=
-MacroID=9a39bc53-04fe-4ca2-b9e0-0250f4aadf68
-Description=一键完成帮派任务
-Enable=0
-AutoRun=0
-[Repeat]
-Type=0
-Number=1
-[SetupUI]
-Type=2
-QUI=
-[Relative]
-SetupOCXFile=
-[Comment]
-
-[Script]
 Dim reallyend
 reallyend = false
 Sub 任务完成
@@ -38,12 +13,12 @@ Sub 是否战斗
     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
     FindColor 967,718,1007,755,"3866C0",intX,intY
     If intX > 0 or intX1 > 0 Then //在战斗中
-        For 5
+        For 2
             Delay 1000
         Next
         Goto 战斗//
     Else //不在战斗中
-        Delay 2000
+        Delay 1000
     End If
 End Sub
 Sub 是否有弹窗
@@ -68,7 +43,7 @@ Sub 是否有弹窗
         MoveTo x, y//点击购买
         Delay 100
         LeftClick 1
-        Delay 3000
+        Delay 800
         Rem 购买
         FindColor 612,63,859,185,"292FE0",intX,intY
         FindColor 936,317,1003,416,"A4FFFF",intX1,intY1
@@ -86,7 +61,7 @@ Sub 是否有弹窗
             MoveTo x, y//点击购买
             Delay 100
             LeftClick 1
-            Delay 3000
+            Delay 2000
             Goto 购买
         End If
         Goto 结束弹窗
@@ -100,7 +75,7 @@ Sub 是否有弹窗
         MoveTo x, y//点击购买
         Delay 100
         LeftClick 1
-        Delay 3000
+        Delay 800
         Goto 结束弹窗
     End If
     FindColor 798,121,924,147,"4288D4",intX1,intY1
@@ -112,7 +87,7 @@ Sub 是否有弹窗
         MoveTo x, y//点击购买
         Delay 100
         LeftClick 1
-        Delay 3000
+        Delay 800
         Goto 结束弹窗
     End If
     FindColor 77,749,281,783,"ACD5F8",intX,intY
@@ -135,7 +110,7 @@ Sub 是否有弹窗
                 LeftClick 1
                 Delay 800
             End If
-            Delay 3000
+            Delay 800
             Goto 结束弹窗
         Else //没有对话选项
             Rem 再次点击
