@@ -99,6 +99,7 @@ Sub 是否有弹窗
             LeftClick 1//点击第一项
             Delay 800
             //是否出现上交弹窗
+            Rem 上交
             FindColor 711,187,938,235,"9BC9E8",intX,intY
             FindColor 762,590,887,639,"63C3EF",intX1,intY1
             If intX > 0 And intY1 > 0 Then //出现上交弹窗
@@ -109,6 +110,11 @@ Sub 是否有弹窗
                 Delay 100
                 LeftClick 1
                 Delay 800
+                FindColor 711,187,938,235,"9BC9E8",intX,intY
+                FindColor 762,590,887,639,"63C3EF",intX1,intY1
+                If intX > 0 And intY1 > 0 Then //如果上交弹窗还在
+                    Goto 上交
+                End If
             End If
             Delay 800
             Goto 结束弹窗
