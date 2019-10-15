@@ -333,6 +333,11 @@ Sub 检查队伍状况
                             Rem 是否满4人
                             FindColor 589,232,669,278,"BAD3E8",intX,intY
                             If intX > 0 And intY > 0 Then //否,不满4人
+                                //如果一件喊话菜单展开
+                                FindColor 766,563,916,631,"D3E3F0",intX,intY
+                                If intX > 0 And intY > 0 Then //是
+                                    Goto 等待
+                                End If
                                 //点击一键喊话
                                 Randomize //初始化随机数生成器。
                                 x = Int(((915-779)* Rnd) + 779) 
@@ -341,6 +346,7 @@ Sub 检查队伍状况
                                 Delay 100
                                 LeftClick 1
                                 Delay 800
+                                Rem 等待
                                 //点击组队频道
                                 Randomize //初始化随机数生成器。
                                 x = Int(((902-785)* Rnd) + 785) 
@@ -349,6 +355,12 @@ Sub 检查队伍状况
                                 Delay 100
                                 LeftClick 1
                                 Delay 800
+                                //是否已经喊过
+                                FindColor 766,563,916,631,"D3E3F0",intX,intY
+                                If intX > 0 And intY > 0 Then //是
+                                    Goto 是否满4人
+                                End If
+                                //点击一键喊话
                                 Randomize //初始化随机数生成器。
                                 x = Int(((915-779)* Rnd) + 779) 
                                 y = Int(((700-660) * Rnd) + 660)
