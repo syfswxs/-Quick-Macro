@@ -1,7 +1,7 @@
 Dim reallyend
 reallyend = false
 Sub 任务完成
-    FindColor 446,460,576,501,"335C70",intX,intY
+    FindColor 461,462,563,501,"67C7F1",intX,intY
     If intX > 0 And intY > 0 Then //出现完成每周70帮派任务弹窗
         reallyend = true
     Else 
