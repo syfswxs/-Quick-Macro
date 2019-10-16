@@ -1,3 +1,28 @@
+[General]
+SyntaxVersion=2
+BeginHotkey=121
+BeginHotkeyMod=0
+PauseHotkey=122
+PauseHotkeyMod=0
+StopHotkey=123
+StopHotkeyMod=0
+RunOnce=1
+EnableWindow=
+MacroID=8633ce9f-5341-47bd-b758-57e5b7d5c7aa
+Description=自动抓鬼
+Enable=1
+AutoRun=0
+[Repeat]
+Type=0
+Number=1
+[SetupUI]
+Type=2
+QUI=
+[Relative]
+SetupOCXFile=
+[Comment]
+
+[Script]
 Dim Obj, sc,jrw，zdgj，shuang
 Set Obj = createobject("WScript.Shell")
 shuang = true//双默认存在
@@ -15,15 +40,14 @@ Sub 是否战斗
         Delay 2000
         //是否抓完一轮
         For 10
-            FindColor 546,442,668,490,"62C1EE",intX,intY
+            FindColor 528,438,697,522,"60BEED",intX,intY
             If intX > 0 And intY > 0 Then //是
-                sc = true 
-                MoveTo intX, intY
-                LeftClick 1//点击继续抓鬼
-                Delay 3000
-                MoveTo 547, 362
-                RightClick 1
-                Delay 3000
+                sc = true
+                MoveTo 418,485
+                Delay 500
+                LeftClick 1//点击取消
+                Delay 500
+                刹车
                 Rem 进入挂机界面
                 Randomize //初始化随机数生成器。
                 x = Int(((473-436)* Rnd) + 436) 
@@ -35,12 +59,6 @@ Sub 是否战斗
                 FindColor 804,633,906,701,"69CAF2",intX,intY
                 If intX > 0 And intY > 0 Then //如果进入了挂机界面
                     //双是否还在
-                    FindColor 967,718,1007,755,"1B2F54",intX1,intY1
-                    FindColor 967,718,1007,755,"3866C0",intX,intY
-                    If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
-                        sc = false
-                        Goto 战斗监测
-                    End If
                     FindColor 554,642,636,687,"0A316C",intX,intY
                     If intX > 0 And intY > 0 Then //是
                         Randomize //初始化随机数生成器。
@@ -52,17 +70,17 @@ Sub 是否战斗
                         Delay 1000
                         检查队伍状况 
                     Else //否
-                        FindColor 967,718,1007,755,"1B2F54",intX1,intY1
-                        FindColor 967,718,1007,755,"3866C0",intX,intY
-                        If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
-                            sc = false
-                            Goto 战斗监测
-                        End If
                         shuang = false
                         //结束脚本
                         Goto 脚本结束
                     End If
                 Else //没有进入
+                    FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+                    FindColor 967,718,1007,755,"3866C0",intX,intY
+                    If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+                        sc = false
+                        Goto 战斗监测
+                    End If
                     Goto 进入挂机界面
                 End If
             Else //否
@@ -415,6 +433,12 @@ Sub 检查队伍状况
     Rem 结束检查队伍状况
 End Sub
 Sub 刹车
+    FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+    FindColor 967,718,1007,755,"3866C0",intX,intY
+    If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+        sc = false
+        Goto 结束刹车
+    End If
     MoveTo 968,614
     Delay 100
     LeftClick 1//随机点击地上一点，阻止进入战斗
@@ -427,6 +451,12 @@ Sub 刹车
     Delay 100
     LeftClick 1//点击地图
     Delay 800
+    FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+    FindColor 967,718,1007,755,"3866C0",intX,intY
+    If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+        sc = false
+        Goto 结束刹车
+    End If
     Randomize //初始化随机数生成器。
     x = Int(((513-443)* Rnd) + 443) 
     y = Int(((496-440) * Rnd) + 440)
@@ -435,14 +465,27 @@ Sub 刹车
     LeftClick 1//点击长安
     Delay 1000
     sc = true
+    Rem 结束刹车
 End Sub//让人物在长安站着不动
 Sub 任务
     //右边信息栏是否打开
     Rem rw信息栏
+    FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+    FindColor 967,718,1007,755,"3866C0",intX,intY
+    If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+        sc = false
+        Goto 结束检查任务
+    End If
     FindColor 750,130,792,180,"8FDBFF",intX,intY
     If intX > 0 And intY > 0 Then //是
         //是否显示任务信息
         Rem rw任务信息
+        FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+        FindColor 967,718,1007,755,"3866C0",intX,intY
+        If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+            sc = false
+            Goto 结束检查任务
+        End If
         FindColor 811,134,854,175,"ADE6D0",intX,intY
         If intX > 0 And intY > 0 Then //是
             //点进任务界面
@@ -471,6 +514,12 @@ Sub 任务
                 End If
             End If
         Else //否
+            FindColor 967,718,1007,755,"1B2F54",intX1,intY1
+            FindColor 967,718,1007,755,"3866C0",intX,intY
+            If intX > 0 or intX1 > 0 Then //如果监测过程中进入了战斗
+                sc = false
+                Goto 结束检查任务
+            End If
             //点击显示任务信息
             Randomize //初始化随机数生成器。
             x = Int(((894-819)* Rnd) + 819) 
@@ -497,16 +546,15 @@ Sub 战斗等待
         If intX > 0 or intX1 > 0 Then //如果进入了战斗
             Goto 等待结束
         End If
-        FindColor 496,398,718,537,"63C2EE",intX,intY
+        FindColor 528,438,697,522,"60BEED",intX,intY
         If intX > 0 And intY > 0 Then //如果出现了人数不足弹窗
             //点击确定补人
-            Randomize //初始化随机数生成器。
-            x = Int(((641-565)* Rnd) + 565) 
-            y = Int(((501-466) * Rnd) + 466)
-            MoveTo x, y
+            MoveTo 418,485
             Delay 500 
-            LeftClick 1//点击
+            LeftClick 1//点击取消
             Delay 300
+            刹车 
+            检查队伍状况
         End If
         Delay 1000
     Next
@@ -727,7 +775,6 @@ Sub 踢人
                     MoveTo intX, intY
                     LeftClick 1
                     Delay 500
-                    
                     MoveTo 780,412
                     Delay 100
                     LeftClick 1//点击请离p3
@@ -742,7 +789,6 @@ Sub 踢人
                         MoveTo intX, intY
                         LeftClick 1
                         Delay 500
-                        
                         MoveTo 499,403
                         Delay 100
                         LeftClick 1//点击请离p4
@@ -810,6 +856,12 @@ Sub 开始
         Call Obj.Popup("5秒后自动关机",5,"自动抓鬼",48)
         Obj.Run "shutdown /f /s /t 0"
         //调用shutdown命令。 /f--强行关闭应用程序而不提醒， /s--关闭计算机（要重启的话，请把这改成/r[重启计算机]），/t time--在time秒后前闭计算机。
+    End If
+End Sub
+Sub test
+    FindColor 528,438,697,522,"60BEED",intX,intY
+    If intX > 0 And intY > 0 Then 
+        MoveTo intX,intY
     End If
 End Sub
 Call 开始
