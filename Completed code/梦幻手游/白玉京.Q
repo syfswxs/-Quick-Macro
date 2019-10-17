@@ -10,7 +10,7 @@ RunOnce=1
 EnableWindow=
 MacroID=eba7fafe-8139-4f6a-9306-401e247e17a8
 Description=梦幻倒计时抢购功能完善版（自己）
-Enable=0
+Enable=1
 AutoRun=0
 [Repeat]
 Type=0
@@ -436,13 +436,18 @@ Sub 刷新判断
     Rem 结束刷新
 End Sub
 Sub 购买
+    FindColor 156,417,342,484,"60C2EF",intX,intY
+    FindColor 361,197,471,300,"4481DB",intX1,intY1
+    If intX > 0 And intY1 > 0 Then //如果出现宠物详情界面
+        RightClick 1
+    End If
     Randomize //初始化随机数生成器。
     x = Int(((887-796)* Rnd) + 796) 
     y = Int(((696-660) * Rnd) + 660)
     MoveTo x, y//移动到购买
     LeftClick 1//点击购买
     Delay 200
-    //MoveTo 488, 287//移动到关闭
+    /*MoveTo 488, 287//移动到关闭*/
     Randomize //初始化随机数生成器。
     x = Int(((357-285)* Rnd) + 285) 
     y = Int(((541-506) * Rnd) + 506)
@@ -456,62 +461,6 @@ Sub 购买
         Qbg = true
     End If
     Rem 结束购买
-End Sub
-Sub 截图
-    If Xj = true Then 
-        Goto 结束截图
-    End If
-    FindColor 321,234,342,248,"9DC1DF",intX,intY
-    If intX> 0 And intY> 0 Then//如果物品消失
-        Randomize //初始化随机数生成器。
-        x = Int(((939-910)* Rnd) + 910) 
-        y = Int(((152-121) * Rnd) + 121)
-        MoveTo x, y//移动到关闭
-        LeftClick 1//点击
-        Delay 800
-        FindColor 967,718,1007,755,"3866C0",intX,intY
-        if intX > 0 And intY > 0 Then //在战斗中
-            Randomize //初始化随机数生成器。
-            x = Int(((40-19)* Rnd) + 19) 
-            y = Int(((95-64) * Rnd) + 64)
-            MoveTo x, y//移动至展开菜单栏按钮  
-            Delay 100
-            LeftClick 1//点击进入
-            Delay 800
-            Randomize //初始化随机数生成器。
-            x = Int(((64-26)* Rnd) + 26) 
-            y = Int(((101-55) * Rnd) + 55)
-            MoveTo x, y//移动到包裹
-            LeftClick 1//点击
-            Delay 500
-        Else //如果不在战斗中
-            Randomize //初始化随机数生成器。
-            x = Int(((1008 - 971) * Rnd) + 971)
-            y = Int(((699 - 660) * Rnd) + 660)
-            MoveTo x, y//移动到包裹
-            LeftClick 1//点击
-            Delay 500
-        End If
-        MoveTo 1468, 918//点击截图按钮
-        LeftClick 1
-        Delay 1000
-        MoveTo 492, 160//找到截图区域
-        LeftDown 1
-        Delay 500
-        MoveTo 921, 644
-        LeftUp 1
-        Delay 500
-        MoveTo 880, 661
-        LeftClick 1
-        Delay 1000
-        MoveTo 1840, 1018//点击发送
-        LeftClick 1
-        Delay 1000
-        MoveTo 928, 140//关闭背包
-        LeftClick 1 
-        Delay 300
-    End If
-    Rem 结束截图
 End Sub
 Sub 获取时间
     Rem InputTime
