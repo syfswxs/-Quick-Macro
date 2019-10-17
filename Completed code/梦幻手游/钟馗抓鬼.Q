@@ -1,3 +1,28 @@
+[General]
+SyntaxVersion=2
+BeginHotkey=121
+BeginHotkeyMod=0
+PauseHotkey=122
+PauseHotkeyMod=0
+StopHotkey=123
+StopHotkeyMod=0
+RunOnce=1
+EnableWindow=
+MacroID=8633ce9f-5341-47bd-b758-57e5b7d5c7aa
+Description=自动抓鬼
+Enable=1
+AutoRun=0
+[Repeat]
+Type=0
+Number=1
+[SetupUI]
+Type=2
+QUI=
+[Relative]
+SetupOCXFile=
+[Comment]
+
+[Script]
 Dim Obj, sc,jrw，zdgj，shuang
 Set Obj = createobject("WScript.Shell")
 shuang = true//双默认存在
