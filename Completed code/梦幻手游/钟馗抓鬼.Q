@@ -49,7 +49,8 @@ Sub 是否战斗
                 Delay 500
                 LeftClick 1//点击取消
                 Delay 500
-                刹车
+                刹车 
+                Delay 1000
                 Rem 进入挂机界面
                 Randomize //初始化随机数生成器。
                 x = Int(((473-436)* Rnd) + 436) 
@@ -171,16 +172,15 @@ Sub 检查队伍状况
             FindColor 859,418,1020,484,"1E43E1",intX,intY
             If intX > 0 And intY > 0 Then //是
                 If zl = 0 Then 
-                    sc = false
+                    //是否刹车状态
+                    If sc = true Then //是
+                        任务 
+                    Else //否
+                        zl = zl +1
+                        战斗等待 
+                    End If
                 Else 
-                    sc = true
-                End If
-                //是否刹车状态
-                If sc = true Then //是
-                    任务 
-                Else //否
-                    zl = zl +1
-                    战斗等待 
+                    任务
                 End If
             Else //否
                 //是否有4个玩家
@@ -261,11 +261,14 @@ Sub 检查队伍状况
                             LeftClick 1
                             Delay 800
                             If zl = 0 Then 
-                                sc = false
+                                //是否刹车状态
+                                If sc = true Then //是
+                                    任务 
+                                Else //否
+                                    zl = zl +1
+                                    战斗等待 
+                                End If
                             Else 
-                                sc = true
-                            End If
-                            If sc = true Then 
                                 任务
                             End If
                         End If
