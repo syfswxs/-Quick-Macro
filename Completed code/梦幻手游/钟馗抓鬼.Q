@@ -1,16 +1,16 @@
 [General]
 SyntaxVersion=2
-BeginHotkey=121
-BeginHotkeyMod=0
-PauseHotkey=122
-PauseHotkeyMod=0
-StopHotkey=123
-StopHotkeyMod=0
+BeginHotkey=71
+BeginHotkeyMod=2
+PauseHotkey=72
+PauseHotkeyMod=2
+StopHotkey=74
+StopHotkeyMod=2
 RunOnce=1
 EnableWindow=
 MacroID=8633ce9f-5341-47bd-b758-57e5b7d5c7aa
 Description=自动抓鬼
-Enable=1
+Enable=0
 AutoRun=0
 [Repeat]
 Type=0
@@ -23,8 +23,9 @@ SetupOCXFile=
 [Comment]
 
 [Script]
-Dim Obj, sc,jrw，zdgj，shuang
+Dim Obj, sc,jrw，zdgj，shuang，zl
 Set Obj = createobject("WScript.Shell")
+zl = 0 //设定站立的值为0
 shuang = true//双默认存在
 zdgj = false//自动关机默认为否
 jrw =false//接任务默认为false
@@ -34,6 +35,7 @@ Sub 是否战斗
     FindColor 967,718,1007,755,"1B2F54",intX1,intY1
     FindColor 967,718,1007,755,"3866C0",intX,intY
     If intX > 0 or intX1 > 0 Then //是
+        zl = 0
         sc = false
         Goto 战斗监测
     Else //否
@@ -168,10 +170,16 @@ Sub 检查队伍状况
             //是否满5个人
             FindColor 859,418,1020,484,"1E43E1",intX,intY
             If intX > 0 And intY > 0 Then //是
+                If zl = 0 Then 
+                    sc = false
+                Else 
+                    sc = true
+                End If
                 //是否刹车状态
                 If sc = true Then //是
                     任务 
                 Else //否
+                    zl = zl +1
                     战斗等待 
                 End If
             Else //否
@@ -252,7 +260,14 @@ Sub 检查队伍状况
                             Delay 100
                             LeftClick 1
                             Delay 800
-                            任务
+                            If zl = 0 Then 
+                                sc = false
+                            Else 
+                                sc = true
+                            End If
+                            If sc = true Then 
+                                任务
+                            End If
                         End If
                     Else //否
                         //点击展开右边信息栏
@@ -754,7 +769,6 @@ Sub 踢人
             Delay 100
             LeftClick 1
             Delay 800
-            Rem 继续踢人
             //p2是否有暂离、离线
             FindColor intN, intM, intN1, intM1,"68645F",intX,intY
             If intX > 0 And intY > 0 Then //是
@@ -765,7 +779,11 @@ Sub 踢人
                 Delay 100
                 LeftClick 1//点击请离p2
                 Delay 500
-                Goto 继续踢人
+                //关闭队伍界面
+                MoveTo 923,136
+                LeftClick 1
+                Delay 800
+                Goto 踢人
             Else //否
                 //p3是否有暂离、离线
                 intN = intN + 171
@@ -779,7 +797,11 @@ Sub 踢人
                     Delay 100
                     LeftClick 1//点击请离p3
                     Delay 500
-                    Goto 继续踢人
+                    //关闭队伍界面
+                    MoveTo 923,136
+                    LeftClick 1
+                    Delay 800
+                    Goto 踢人
                 Else //否
                     //p4是否有暂离、离线
                     intN = intN + 171
@@ -793,7 +815,11 @@ Sub 踢人
                         Delay 100
                         LeftClick 1//点击请离p4
                         Delay 500
-                        Goto 继续踢人
+                        //关闭队伍界面
+                        MoveTo 923,136
+                        LeftClick 1
+                        Delay 800
+                        Goto 踢人
                     Else //否
                         //p5是否有暂离、离线
                         intN = intN + 171
@@ -808,7 +834,11 @@ Sub 踢人
                             LeftClick 1
                             Delay 800//点击请离p5
                             Delay 500
-                            Goto 继续踢人
+                            //关闭队伍界面
+                            MoveTo 923,136
+                            LeftClick 1
+                            Delay 800
+                            Goto 踢人
                         Else 
                             //关闭队伍界面
                             MoveTo 923,136
