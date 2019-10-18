@@ -1,16 +1,16 @@
 [General]
 SyntaxVersion=2
-BeginHotkey=97
+BeginHotkey=81
 BeginHotkeyMod=2
-PauseHotkey=98
+PauseHotkey=87
 PauseHotkeyMod=2
-StopHotkey=99
+StopHotkey=69
 StopHotkeyMod=2
 RunOnce=1
 EnableWindow=
 MacroID=eba7fafe-8139-4f6a-9306-401e247e17a8
-Description=梦幻倒计时抢购功能完善版（自己）
-Enable=1
+Description=自动抢购
+Enable=0
 AutoRun=0
 [Repeat]
 Type=0
@@ -288,6 +288,13 @@ Sub 开始
             Goto reallyEnd //退出程序
         End if
         For 5//系统每5秒监测一下时间
+            FindColor 637,485,883,696,"53A1EB",intX1,intY1//福利刮刮乐
+            FindColor 25,163,240,377,"1F42FF",intX2,intY2//福利左侧灯笼
+            FindColor 816,111,971,231,"0000C9",intX3,intY3//福利关闭按钮
+            If intX1 > 0 And intX2 > 0 and intX3 > 0 Then 
+                MoveTo 902, 160
+                LeftClick 1//点击关闭12点弹窗
+            End If
             Delay 1000
         Next
         Goto Start
@@ -410,16 +417,19 @@ Sub 刷新判断
     rem 监测是否刷出
     FindColor 318,234,362,248,"D3E3F0",intX,intY
     If intX> 0 And intY> 0 Then//如果刷出物品
-        MoveTo intX+100, intY+30 //选中物品
+        MoveTo 417,268  //选中物品
         Delay 100
         LeftClick 1//点击选中
         Delay 200
+        Rem 重复购买
         FindColor 389,235,445,258,"6FD6FD",intX,intY
         If intX > 0 And intY > 0 Then //如果已经被选中
             购买
-            Rem 重复购买
             FindColor 377,244,515,283,"A0C3DF",intX,intY
             If intX > 0 And intY > 0 Then //如果物品不在
+                MoveTo 925, 138//点击关闭按钮
+                LeftClick 1
+                Delay 500
                 Goto 结束刷新
             Else 
                 购买
@@ -524,7 +534,6 @@ End Sub
 Sub 抢购 
     转到商城关注 
     刷新判断 
-    截图
 End Sub
 Sub 查看安全锁
     FindColor 967,718,1007,755,"3866C0",intX,intY
