@@ -35,7 +35,7 @@ UEsDBBQAAgAIAEQ9Mk8dcfMMFAUAALYVAAAQABEAzrTRodbQtcS52NeiLmJtcFVUDQAH2t+BXdrfgV3a
 	注意：有坐骑的玩家适用 
 */
 //*********************************   源代码   *****************************************
-Dim Obj, UserName, NowTime, LenS, Num
+Dim Obj, UserName, NowTime, LenS, Num,aqs
 Qbg = false
 tuichu = false
 zdgj = false//自动关机
@@ -597,21 +597,28 @@ End Sub
 Sub 查看安全锁
     FindColor 967,718,1007,755,"3866C0",intX,intY
     if intX > 0 And intY > 0 Then //在战斗中
+        Rem 点击展开
         Randomize //初始化随机数生成器。
         x = Int(((40-22)* Rnd) + 22) 
         y = Int(((93-65) * Rnd) + 65)
         MoveTo x, y//移动至展开菜单栏按钮  
         Delay 100
         LeftClick 1//点击进入
-        Delay 300
-        Randomize //初始化随机数生成器。
-        x = Int(((205-169)* Rnd) + 169) 
-        y = Int(((250-212) * Rnd) + 212)
-        MoveTo x, y//移动至设置按钮  
-        Delay 100
-        LeftClick 1//点击进入
-        Delay 300
-        安全锁
+        Delay 500
+        FindColor 357,48,414,110,"91DDFF",intX,intY
+        If intX > 0 And intY > 0 Then //如果展开
+            rem 战斗进设置
+            Randomize //初始化随机数生成器。
+            x = Int(((205-169)* Rnd) + 169) 
+            y = Int(((250-212) * Rnd) + 212)
+            MoveTo x, y//移动至设置按钮  
+            Delay 100
+            LeftClick 1//点击进入
+            Delay 300
+            安全锁
+        Else 
+            Goto 点击展开
+        end if
         FindColor 370,71,385,88,"97E4FF",intX,intY
         If intX > 0 And intY > 0 Then 
             MoveTo intX,intY//移动关闭按钮  
@@ -620,9 +627,9 @@ Sub 查看安全锁
             Delay 300
         End If
     Else //如果没在战斗中
+        Rem 进入设置
         FindColor 898,743,916,761,"2022FB",intX,intY
         If intX > 0 And intY > 0 Then //如果下方系统栏展开
-            Rem 进入设置
             Randomize //初始化随机数生成器。
             x = Int(((585-545)* Rnd) + 545) 
             y = Int(((758-732) * Rnd) + 732)
@@ -650,7 +657,7 @@ Sub 安全锁
     MoveTo x, y//移动至安全锁按钮  
     Delay 100
     LeftClick 1//点击进入
-    Delay 300
+    Delay 800
     FindColor 753,444,778,467,"2956FF",intX,intY
     If intX > 0 And intY > 0 Then //如果安全锁是关闭状态
         aqs = true//安全锁已打开
