@@ -10,7 +10,7 @@ RunOnce=1
 EnableWindow=
 MacroID=eba7fafe-8139-4f6a-9306-401e247e17a8
 Description=自动抢购
-Enable=0
+Enable=1
 AutoRun=0
 [Repeat]
 Type=0
@@ -200,6 +200,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th1 = intNowTimeH and tm1-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm1 = 0//初始化
             th1 = 0
@@ -211,6 +212,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th2 = intNowTimeH and tm2-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm2 = 0//初始化
             th2 = 0
@@ -222,6 +224,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th3 = intNowTimeH and tm3-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm3 = 0//初始化
             th3 = 0
@@ -233,6 +236,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th4 = intNowTimeH and tm4-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm4 = 0//初始化
             th4 = 0
@@ -244,6 +248,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th5 = intNowTimeH and tm5-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm5 = 0//初始化
             th5 = 0
@@ -255,6 +260,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th6 = intNowTimeH and tm6-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm6 = 0//初始化
             th6 = 0
@@ -266,6 +272,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th7 = intNowTimeH and tm7-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm7 = 0//初始化
             th7 = 0
@@ -277,6 +284,7 @@ Sub 开始
         intNowTimeH = CInt(Hour(NowTime))//把获取的系统时间小时转换成整数型
         If th8 = intNowTimeH and tm8-1 = intNowTimeM Then //如果到了抢购时间的前一分钟
             intXJtimeM = intNowTimeM//抢购前记录开始抢购的时间
+            Call Obj.Popup("5秒后自动抢购，如在操作请放下鼠标！",5,"白玉京",48)
             Call 抢购
             tm8 = 0//初始化
             th8 = 0
@@ -332,21 +340,35 @@ End Sub
 Sub 转到商城关注
     FindColor 967,718,1007,755,"3866C0",intX,intY
     If intX > 0 And intY > 0 Then //在战斗中
+        Rem 点击展开
         Randomize //初始化随机数生成器。
         x = Int(((40-22)* Rnd) + 22) 
         y = Int(((93-65) * Rnd) + 65)
         MoveTo x, y//移动至展开菜单栏按钮  
         Delay 100
         LeftClick 1//点击进入
-        Delay 500
-        Randomize //初始化随机数生成器。
-        x = Int(((63-27)* Rnd) + 27) 
-        y = Int(((258-215) * Rnd) + 215)
-        MoveTo x, y//移动至商城按钮  
-        Delay 500
-        LeftClick 1//点击进入
         Delay 800
+        FindColor 357,48,414,110,"91DDFF",intX,intY
+        If intX > 0 And intY > 0 Then //如果展开
+            Rem 战斗进商城
+            Randomize //初始化随机数生成器。
+            x = Int(((63-27)* Rnd) + 27) 
+            y = Int(((258-215) * Rnd) + 215)
+            MoveTo x, y//移动至商城按钮  
+            Delay 500
+            LeftClick 1//点击进入
+            Delay 800
+            FindColor 211, 76, 410, 183, "2A31E1", intXsd, intYsd
+            FindColor 896,92,966,174,"0000D0",intXgb,intYgb
+            If intXsd > 0 And intXgb > 0 Then 
+            Else 
+                Goto 战斗进商城
+            End If
+        Else //没有展开
+            Goto 点击展开
+        End If
     Else //如果不是在战斗中
+        Rem 直接进商城
         Randomize //初始化随机数生成器。
         x = Int(((56-15)* Rnd) + 15) 
         y = Int(((241-204) * Rnd) + 204)
@@ -354,7 +376,14 @@ Sub 转到商城关注
         Delay 300
         LeftClick 1	//点击进入
         Delay 800
+        FindColor 211, 76, 410, 183, "2A31E1", intXsd, intYsd
+        FindColor 896,92,966,174,"0000D0",intXgb,intYgb//出现商城特征
+        If intXsd > 0 And intXgb > 0 Then 
+        Else 
+            Goto 直接进商城
+        End If
     End If
+    Rem 点击摆摊
     Randomize //初始化随机数生成器。
     x = Int(((986-954)* Rnd) + 954) 
     y = Int(((391-335) * Rnd) + 335)
@@ -362,12 +391,22 @@ Sub 转到商城关注
     Delay 300
     LeftClick 1//点击选中
     Delay 300
-    Randomize //初始化随机数生成器。
-    x = Int(((79-49)* Rnd) + 49) 
-    y = Int(((344-292) * Rnd) + 292)
-    MoveTo x, y//本服
-    Delay 500
-    LeftClick 1//点击选中
+    FindColor 919,308,1019,417,"75FEFF",intXbt,intYbt
+    If intXbt > 0 And intYbt > 0 Then //摆摊特征出现
+        FindColor 47,282,81,349,"CCE3F4",intX,intY
+        If intX > 0 And intY > 0 Then //如果本服特征出现
+            刷新判断
+        Else 
+            Randomize //初始化随机数生成器。
+            x = Int(((79-49)* Rnd) + 49) 
+            y = Int(((344-292) * Rnd) + 292)
+            MoveTo x, y//本服
+            Delay 500
+            LeftClick 1//点击选中
+        End If
+    Else 
+        Goto 点击摆摊
+    End If
 End Sub
 Sub 刷新判断
     intXJtimeM = intXJtimeM + 3//3分钟的刷新时间
@@ -432,33 +471,34 @@ Sub 刷新判断
     End If
     rem 监测是否刷出
     FindColor 318,234,362,248,"D3E3F0",intX,intY
-    If intX> 0 And intY> 0 Then//如果刷出物品
+    If intX > 0 And intY > 0 Then //如果刷出物品
+        Rem 选中物品
         MoveTo 417,268  //选中物品
         Delay 100
         LeftClick 1//点击选中
-        Delay 200
-        Rem 重复购买
+        Delay 300
         FindColor 389,235,445,258,"6FD6FD",intX,intY
         If intX > 0 And intY > 0 Then //如果已经被选中
-            购买
+            Rem 重复购买
             FindColor 377,244,515,283,"A0C3DF",intX,intY
             If intX > 0 And intY > 0 Then //如果物品不在
                 MoveTo 925, 138//点击关闭按钮
                 LeftClick 1
                 Delay 500
                 Goto 结束刷新
-            Else 
+            Else //如果物品还存在
                 购买
                 If Qbg = true Then 
                     Goto 结束刷新
                 End If
+                Goto 重复购买
             End If
-            Goto 重复购买//如果没有刷出物品则跳到刷新关注
         Else 
-            Goto 监测是否刷出
+            Goto 选中物品
         End If
+    Else 
+        Goto 疯狂刷新
     End If
-    Goto 疯狂刷新
     Rem 结束刷新
 End Sub
 Sub 购买
@@ -553,7 +593,6 @@ Sub 获取时间
 End Sub 
 Sub 抢购 
     转到商城关注 
-    刷新判断 
 End Sub
 Sub 查看安全锁
     FindColor 967,718,1007,755,"3866C0",intX,intY
