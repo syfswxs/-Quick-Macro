@@ -191,6 +191,9 @@ Sub 开始
         End If
         Call Obj.Popup("白玉京系统将在" & th1 & "时" & tm1 & "分、" & th2 & "时" & tm2 & "分、" & th3 & "时" & tm3 & "分、" & th4 & "时" & tm4 & "分、" & th5 & "时" & tm5 & "分、" & th6 & "时" & tm6 & "分、" & th7 & "时" & tm7 & "分、" & th8 & "时" & tm8 & "分抢购！！", 5, "白玉京", 48)
         Rem Start
+        If Qbg = true Then 
+            Goto 钱不够
+        End If
         NowTime=Time
         //Time -- 获得当前时间
         intNowTimeM = CInt(Minute(NowTime))//把获取的系统时间分钟转换成整数型
@@ -279,6 +282,17 @@ Sub 开始
             th8 = 0
             t8 = True
         End If
+        Rem 钱不够
+        If Qbg = true Then 
+            t1 = true
+            t2 = true
+            t3 = true
+            t4 = true
+            t5 = true
+            t6 = true
+            t7 = true 
+            t8 = true
+        End If
         If t1 = true and t2 = true and t3 = true and t4 = true and t5 = true and t6 = true and t7 = true and t8 = true Then //如果设定的时间都跑完
             If zdgj = true Then 
                 Call Obj.Popup("5秒后自动关机",5,"白玉京",48)
@@ -361,7 +375,8 @@ Sub 刷新判断
     x = Int(((246-127)* Rnd) + 127) 
     y = Int(((603-308) * Rnd) + 308)
     MoveTo x, y//移动到左边选项栏
-    rem 关注
+    Rem 关注
+    宠物界面取消
     MoveTo 189, 354//向上划选项栏
     LeftDown 1
     Delay 300
@@ -404,6 +419,7 @@ Sub 刷新判断
     LeftClick 1//点击
     Delay 800
     Rem 疯狂刷新
+    宠物界面取消
     LeftClick 1//点击
     NowTime = Time//获取第一次刷新的当下时间
     intNowTimeM = CInt(Minute(NowTime))
@@ -446,31 +462,35 @@ Sub 刷新判断
     Rem 结束刷新
 End Sub
 Sub 购买
-    FindColor 156,417,342,484,"60C2EF",intX,intY
-    FindColor 361,197,471,300,"4481DB",intX1,intY1
-    If intX > 0 And intY1 > 0 Then //如果出现宠物详情界面
-        RightClick 1
-    End If
+    Rem 点击购买
+    宠物界面取消
     Randomize //初始化随机数生成器。
     x = Int(((887-796)* Rnd) + 796) 
     y = Int(((696-660) * Rnd) + 660)
     MoveTo x, y//移动到购买
     LeftClick 1//点击购买
     Delay 200
-    /*MoveTo 488, 287//移动到关闭*/
-    Randomize //初始化随机数生成器。
-    x = Int(((357-285)* Rnd) + 285) 
-    y = Int(((541-506) * Rnd) + 506)
-    MoveTo x, y//移动到确认
-    LeftClick 1//点击确定
-    Delay 300
-    FindColor 385,477,638,530,"C6E370",intX,intY
-    If intX> 0 And intY> 0 Then//如果出现钱不够情况 
-        MoveTo 704, 306
-        LeftClick 1
-        Qbg = true
+    FindColor 214,480,430,566,"63C3EE",intX,intY
+    If intX > 0 And intY > 0 Then //如果有购买按钮
+        宠物界面取消
+		/*MoveTo 488, 287//移动到关闭*/
+        Randomize //初始化随机数生成器。
+        x = Int(((357-285)* Rnd) + 285) 
+        y = Int(((541-506) * Rnd) + 506)
+        MoveTo x, y//移动到确认
+        LeftClick 1//点击确定
+        Delay 300
+        宠物界面取消
+        FindColor 364, 453, 664, 544, "63C2EF", intqx, intqy
+        FindColor 670,267,743,344,"0013C0",intqx1,intqx1
+        If intqx > 0 And intqx1 > 0 Then //出现钱不够
+            MoveTo 704, 306
+            LeftClick 1
+            Qbg = true
+        End If
+    Else 
+        Goto 点击购买
     End If
-    Rem 结束购买
 End Sub
 Sub 获取时间
     Rem InputTime
@@ -604,6 +624,13 @@ Sub 安全锁
         LeftClick 1//点击进入
         Delay 300
     End If 
+End Sub
+Sub 宠物界面取消
+    FindColor 156,417,342,484,"60C2EF",intX,intY
+    FindColor 361,197,471,300,"4481DB",intX1,intY1
+    If intX > 0 And intY1 > 0 Then //如果出现宠物详情界面
+        RightClick 1
+    End If
 End Sub
 Sub 主程序
     查看安全锁 
