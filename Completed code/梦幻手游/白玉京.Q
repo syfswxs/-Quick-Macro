@@ -473,27 +473,33 @@ Sub 刷新判断
     FindColor 318,234,362,248,"D3E3F0",intX,intY
     If intX > 0 And intY > 0 Then //如果刷出物品
         Rem 选中物品
-        MoveTo 417,268  //选中物品
-        Delay 100
-        LeftClick 1//点击选中
-        Delay 300
         FindColor 389,235,445,258,"6FD6FD",intX,intY
         If intX > 0 And intY > 0 Then //如果已经被选中
-            Rem 重复购买
-            FindColor 377,244,515,283,"A0C3DF",intX,intY
-            If intX > 0 And intY > 0 Then //如果物品不在
-                MoveTo 925, 138//点击关闭按钮
-                LeftClick 1
-                Delay 500
-                Goto 结束刷新
-            Else //如果物品还存在
+            Rem 物品是否消失
+            FindColor 468,244,585,282,"71D8FD",intX,intY
+            If intX > 0 And intY > 0 Then //如果物品存在且是选中状态
                 购买
                 If Qbg = true Then 
                     Goto 结束刷新
                 End If
-                Goto 重复购买
+                Goto 物品是否消失
+            End If
+            FindColor 478,244,575,280,"D3E3F0",intX,intY
+            If intX > 0 And intY > 0 Then //如果物品存在是未勾选转态
+                Goto 选中物品
+            End If
+            FindColor 478,244,575,280,"A0C3DF",intX,intY
+            If intX > 0 And intY > 0 Then //如果物品不存在
+                MoveTo 925, 138//点击关闭按钮
+                LeftClick 1
+                Delay 500
+                Goto 结束刷新
             End If
         Else 
+            MoveTo 417,268  //选中物品
+            Delay 100
+            LeftClick 1//点击选中
+            Delay 300
             Goto 选中物品
         End If
     Else 
@@ -687,4 +693,4 @@ Sub 主程序
     开始 
     Rem 结束
 End Sub
-Call 主程序
+Call 刷新判断
